@@ -9,6 +9,14 @@ public class Cartella_Clinica {
 
     /* DataCompilazione date */
 
+    public Cartella_Clinica(String specie, int lunghezza, int larghezza, int peso, String luogoRitrovamento) {
+        this.specie = specie;
+        this.lunghezza = lunghezza;
+        this.larghezza = larghezza;
+        this.peso = peso;
+        this.luogoRitrovamento = luogoRitrovamento;
+    }
+
     public String getSpecie() {
         return specie;
     }

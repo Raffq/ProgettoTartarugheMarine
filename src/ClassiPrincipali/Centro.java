@@ -4,6 +4,11 @@ public class Centro {
     String idCentro;
     String nomeCentro;
 
+    public Centro(String idCentro, String nomeCentro) {
+        this.idCentro = idCentro;
+        this.nomeCentro = nomeCentro;
+    }
+
     public String getIdCentro() {
         return idCentro;
     }

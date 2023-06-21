@@ -4,6 +4,11 @@ public class Vasca {
     String idVasca;
     int postiOccupati;
 
+    public Vasca(String idVasca, int postiOccupati) {
+        this.idVasca = idVasca;
+        this.postiOccupati = postiOccupati;
+    }
+
     public String getIdVasca() {
         return idVasca;
     }

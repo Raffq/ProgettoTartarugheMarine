@@ -8,6 +8,15 @@ public class Sede {
     String regione;
     String paese;
 
+    public Sede(String via, int numeroCivico, int cap, String citta, String regione, String paese) {
+        this.via = via;
+        this.numeroCivico = numeroCivico;
+        this.cap = cap;
+        this.citta = citta;
+        this.regione = regione;
+        this.paese = paese;
+    }
+
     public String getVia() {
         return via;
     }
