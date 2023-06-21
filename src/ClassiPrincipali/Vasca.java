@@ -1,8 +1,8 @@
 package ClassiPrincipali;
 
 public class Vasca {
-    String idVasca;
-    int postiOccupati;
+    private String idVasca;
+    private int postiOccupati;
 
     public Vasca(String idVasca, int postiOccupati) {
         this.idVasca = idVasca;

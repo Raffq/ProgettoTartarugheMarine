@@ -1,9 +1,9 @@
 package ClassiPrincipali;
 
 public class Personale {
-    String matricola;
-    String nome;
-    String cognome;
+    private String matricola;
+    private String nome;
+    private String cognome;
 
     public Personale(String matricola, String nome, String cognome) {
         this.matricola = matricola;

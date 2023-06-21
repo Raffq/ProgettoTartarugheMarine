@@ -1,12 +1,12 @@
 package ClassiPrincipali;
 
 public class Sede {
-    String via;
-    int numeroCivico;
-    int cap;
-    String citta;
-    String regione;
-    String paese;
+    private String via;
+    private int numeroCivico;
+    private int cap;
+    private String citta;
+    private String regione;
+    private String paese;
 
     public Sede(String via, int numeroCivico, int cap, String citta, String regione, String paese) {
         this.via = via;

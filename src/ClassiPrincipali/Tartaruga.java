@@ -1,9 +1,9 @@
 package ClassiPrincipali;
 
 public class Tartaruga {
-    String targhetta;
-    String nomeTartaruga;
-    boolean presenteNelCentro;
+    private String targhetta;
+    private String nomeTartaruga;
+    private boolean presenteNelCentro;
 
     public Tartaruga(String targhetta, String nomeTartaruga, boolean presenteNelCentro) {
         this.targhetta = targhetta;

@@ -1,8 +1,8 @@
 package ClassiPrincipali;
 
 public class Centro {
-    String idCentro;
-    String nomeCentro;
+    private String idCentro;
+    private String nomeCentro;
 
     public Centro(String idCentro, String nomeCentro) {
         this.idCentro = idCentro;
