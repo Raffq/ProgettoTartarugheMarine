@@ -4,5 +4,19 @@ public class Centro {
     String idCentro;
     String nomeCentro;
 
+    public String getIdCentro() {
+        return idCentro;
+    }
 
+    public void setIdCentro(String idCentro) {
+        this.idCentro = idCentro;
+    }
+
+    public String getNomeCentro() {
+        return nomeCentro;
+    }
+
+    public void setNomeCentro(String nomeCentro) {
+        this.nomeCentro = nomeCentro;
+    }
 }
