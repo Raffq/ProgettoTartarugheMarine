@@ -1,4 +1,4 @@
 package ClassiPrincipali;
 
-public class Ricercatore {
+public class Ricercatore extends Personale{
 }

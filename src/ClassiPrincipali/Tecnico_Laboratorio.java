@@ -1,4 +1,4 @@
 package ClassiPrincipali;
 
-public class Tecnico_Laboratorio {
+public class Tecnico_Laboratorio extends Personale{
 }

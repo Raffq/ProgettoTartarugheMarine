@@ -1,4 +1,4 @@
 package ClassiPrincipali;
 
-public class Operatore {
+public class Operatore extends Personale{
 }
