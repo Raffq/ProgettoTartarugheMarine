@@ -2,7 +2,7 @@ import java.sql.*;
 public class Database {
     private static String url="jdbc:postgresql://localhost:5432/CENTRO DI RICOVERO PER TARTARUGHE MARINE";
     private static String user="postgres";
-    private static String password="password";
+    private static String password="";
 
     private Database() {}
 
