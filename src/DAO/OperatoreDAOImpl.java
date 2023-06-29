@@ -23,7 +23,7 @@ public class OperatoreDAOImpl implements OperatoreDAO {
             String cognome = rs.getString("cognome");
             String fkidcentro=rs.getString("fkidcentro");
 
-            operatore = new operatore(matricolaop, nome, cognome, fkidcentro);
+            operatore = new Operatore(matricolaop, nome, cognome, fkidcentro);
         }
         return operatore;
     }
