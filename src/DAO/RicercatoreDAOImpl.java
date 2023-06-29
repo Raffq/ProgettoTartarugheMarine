@@ -21,7 +21,7 @@ public class RicercatoreDAOImpl implements RicercatoreDAO{
         ResultSet resultSet = ps.executeQuery();
         try {
             if (resultSet.next()) {
-                String matricola = resultSet.getString("matricolaric");
+                String matricola = resultSet.getString("matricolarc");
                 String nome = resultSet.getString("nome");
                 String cognome = resultSet.getString("cognome");
                 String fkidcentro = resultSet.getString("fkidcentro");
@@ -33,5 +33,5 @@ public class RicercatoreDAOImpl implements RicercatoreDAO{
         }
         return ricercatore;
     }
-    }
+
 }
