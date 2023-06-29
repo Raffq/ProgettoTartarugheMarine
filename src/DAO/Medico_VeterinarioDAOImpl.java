@@ -25,6 +25,6 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
 
             medico_veterinario = new Medico_Veterinario(matricolamv, nome, cognome, fkidcentro);
         }
-        return Medico_Veterinario;
+        return medico_veterinario;
     }
 }
