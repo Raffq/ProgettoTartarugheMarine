@@ -4,5 +4,5 @@ import java.sql.*;
 import java.util.List;
 
 public interface DAO<T> {
-    T get(int id) throws SQLException;
+    T get(String id) throws SQLException;
 }
