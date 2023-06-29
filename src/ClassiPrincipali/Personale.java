@@ -5,10 +5,13 @@ public class Personale {
     private String nome;
     private String cognome;
 
-    public Personale(String matricola, String nome, String cognome) {
+    private String fkidcentro;
+
+    public Personale(String matricola, String nome, String cognome, String fkidcentro) {
         this.matricola = matricola;
         this.nome = nome;
         this.cognome = cognome;
+        this.fkidcentro=fkidcentro;
     }
 
     public String getMatricola() {
@@ -33,5 +36,13 @@ public class Personale {
 
     public void setCognome(String cognome) {
         this.cognome = cognome;
+    }
+
+    public String getfkidcentro() {
+        return fkidcentro;
+    }
+
+    public void setfkidcentro(String fkidcentro) {
+        this.fkidcentro = fkidcentro;
     }
 }
