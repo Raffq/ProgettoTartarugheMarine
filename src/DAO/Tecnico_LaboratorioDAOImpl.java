@@ -14,7 +14,7 @@ public class Tecnico_LaboratorioDAOImpl implements Tecnico_LaboratorioDAO{
         Connection con = Database.getConnection();
         Tecnico_Laboratorio tecnico_laboratorio = null;
 
-        String sql = "Select * From ricercatore Where matricolatl = ?";
+        String sql = "Select * From tecnico_laboratorio Where matricolatl = ?";
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setString(1, id);
