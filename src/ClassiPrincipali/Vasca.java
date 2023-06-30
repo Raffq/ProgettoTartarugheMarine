@@ -3,10 +3,12 @@ package ClassiPrincipali;
 public class Vasca {
     private String idVasca;
     private int postiOccupati;
+    private String fkidcentro;
 
-    public Vasca(String idVasca, int postiOccupati) {
+    public Vasca(String idVasca, int postiOccupati, String fkidcentro) {
         this.idVasca = idVasca;
         this.postiOccupati = postiOccupati;
+        this.fkidcentro = fkidcentro;
     }
 
     public String getIdVasca() {
