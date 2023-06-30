@@ -7,6 +7,9 @@ public class Personale {
 
     private String fkidcentro;
 
+    public Personale() {
+    }
+
     public Personale(String matricola, String nome, String cognome, String fkidcentro) {
         this.matricola = matricola;
         this.nome = nome;

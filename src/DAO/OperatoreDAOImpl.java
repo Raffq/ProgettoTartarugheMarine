@@ -4,6 +4,8 @@ import ClassiPrincipali.Operatore;
 import java.sql.*;
 import java.util.List;
 
+
+
 public class OperatoreDAOImpl implements OperatoreDAO {
 
     @Override
@@ -30,4 +32,58 @@ public class OperatoreDAOImpl implements OperatoreDAO {
         }
         return operatore;
     }
+
+    @Override
+    public void ammetti(String nome, String idCentro, Date data) throws SQLException {
+        try {
+            Connection con = Database.getConnection();
+            String sql = "CALL ammetti(?, ?, ?)";
+
+            CallableStatement cs = con.prepareCall(sql);
+
+            cs.setString(1, nome);
+            cs.setString(2, idCentro);
+            cs.setDate(3, data);
+
+            cs.execute();
+
+        } catch(SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+        }
+    }
+
+    public void riammetti(String IdTar, Date data) throws SQLException {
+        try {
+            Connection con = Database.getConnection();
+            String sql = "CALL riammetti(?, ?)";
+
+            CallableStatement cs = con.prepareCall(sql);
+
+            cs.setString(1, IdTar);
+            cs.setDate(2, data);
+
+            cs.execute();
+
+        } catch(SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+        }
+    }
+
+    public void rilascia(String IdTar, Date data) throws SQLException {
+        try {
+            Connection con = Database.getConnection();
+            String sql = "CALL rilascia(?, ?)";
+
+            CallableStatement cs = con.prepareCall(sql);
+
+            cs.setString(1, IdTar);
+            cs.setDate(2, data);
+
+            cs.execute();
+
+        } catch(SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
+        }
+    }
+
 }
