@@ -1,8 +1,10 @@
-package DAO;
+package DAO.Medico_Veterinario;
 
 import ClassiPrincipali.Medico_Veterinario;
+import DAO.Database;
+import DAO.Medico_Veterinario.Medico_VeterinarioDAO;
+
 import java.sql.*;
-import java.util.List;
 
 public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
 

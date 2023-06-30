@@ -1,9 +1,10 @@
-package DAO;
+package DAO.Operatore;
 
 import ClassiPrincipali.Operatore;
-import java.sql.*;
-import java.util.List;
+import DAO.Database;
+import DAO.Operatore.OperatoreDAO;
 
+import java.sql.*;
 
 
 public class OperatoreDAOImpl implements OperatoreDAO {

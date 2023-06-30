@@ -1,6 +1,7 @@
-package DAO;
+package DAO.Operatore;
 
 import ClassiPrincipali.Operatore;
+import DAO.DAO;
 
 import java.sql.Date;
 import java.sql.SQLException;

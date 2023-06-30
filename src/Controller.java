@@ -1,5 +1,10 @@
 import ClassiPrincipali.*;
-import DAO.*;
+import DAO.Medico_Veterinario.Medico_VeterinarioDAO;
+import DAO.Medico_Veterinario.Medico_VeterinarioDAOImpl;
+import DAO.Operatore.OperatoreDAO;
+import DAO.Operatore.OperatoreDAOImpl;
+import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAO;
+import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAOImpl;
 
 import java.sql.SQLException;
 
