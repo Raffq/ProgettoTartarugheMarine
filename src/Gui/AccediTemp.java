@@ -1,3 +1,11 @@
+package Gui;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+
+import DAO.*;
 import ClassiPrincipali.*;
 import DAO.Medico_Veterinario.Medico_VeterinarioDAO;
 import DAO.Medico_Veterinario.Medico_VeterinarioDAOImpl;
@@ -6,11 +14,41 @@ import DAO.Operatore.OperatoreDAOImpl;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAO;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAOImpl;
 
-import java.sql.SQLException;
+public class AccediTemp extends JFrame {
+    private JTextField matricola;
+    private JButton accedi;
+    Personale ps;
+    public AccediTemp()  {
+        super("Accedi");
 
-public class Controller {
+        setLayout(new BorderLayout());
 
-    public Controller() {}
+        matricola=new JTextField();
+        accedi=new JButton("Accedi");
+
+        add(accedi, BorderLayout.PAGE_START);
+        add(matricola, BorderLayout.CENTER);
+
+        accedi.addActionListener(new ActionListener()  {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ps=null;
+                String matricolatemp = matricola.getText();
+                try {
+                    ps=controllaMatricola(matricolatemp);
+                    accedi(ps);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                dispose();
+            }
+        });
+
+        setSize(800, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
 
     Personale controllaMatricola(String MatricolaTemp) throws SQLException {
         if (MatricolaTemp.substring(0, 2).equals("OP")) {
@@ -39,6 +77,8 @@ public class Controller {
 
     void accedi(Personale personale) {
         if (personale instanceof Operatore) {
+            OperatoreTemp operatoreTemp1=new OperatoreTemp();
+            operatoreTemp1.show();
             System.out.println("OpenInterfaccia");
         }
         else if (personale instanceof Medico_Veterinario) {

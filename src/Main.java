@@ -1,15 +1,11 @@
 import DAO.Database;
+import Gui.AccediTemp;
+import Gui.OperatoreTemp;
 
 import java.sql.*;
 public class Main {
     public static void main(String[] args) throws SQLException {
-        Connection con = Database.getConnection();
-
-        if (con!=null) {
-            System.out.println("Successo!");
-        }
-        else {
-            System.out.println("No!");
-        }
+        AccediTemp accediTemp=new AccediTemp();
+        //OperatoreTemp operatoreTemp=new OperatoreTemp();
     }
 }
