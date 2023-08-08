@@ -1,8 +1,7 @@
-package Gui;
+package Gui.OperatoreGUI;
 
 import javax.swing.*;
 import java.awt.*;
-
 public class BottoniOperatore extends JPanel {
     private JButton ammetti;
     private JButton riammetti;

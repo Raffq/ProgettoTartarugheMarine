@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
-import DAO.*;
 import ClassiPrincipali.*;
 import DAO.Medico_Veterinario.Medico_VeterinarioDAO;
 import DAO.Medico_Veterinario.Medico_VeterinarioDAOImpl;
@@ -13,6 +12,7 @@ import DAO.Operatore.OperatoreDAO;
 import DAO.Operatore.OperatoreDAOImpl;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAO;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAOImpl;
+import Gui.OperatoreGUI.OperatoreTemp;
 
 public class AccediTemp extends JFrame {
     private JTextField matricola;

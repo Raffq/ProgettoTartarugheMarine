@@ -1,32 +1,36 @@
-package Gui;
+package Gui.OperatoreGUI;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class RiammettiTemp extends JFrame {
-    private JTable tartarugheNelCentro;
+    private JTable listaTartarughe;
     private JComboBox anno;
     private JComboBox mese;
     private JComboBox giorno;
+    private JButton conferma;
     String[] colonneTable;
     Object[][] data;
 
 
     public RiammettiTemp(){
-        super("Riammissione");
+        super("Riammissione tartaruga");
 
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
-        colonneTable = new String[2];
-        String[] colonneTable = {"Nome", "Targhetta"};
+        listaTartarughe = new JTable();
+        Object[] columns = {"Targhetta", "Nome"};
+        DefaultTableModel model = new DefaultTableModel(columns,10);
 
-        data = new Object[2][2];
-        Object[][] data = {{"test1", "test2"},{"test3", "test4"},{"test1", "test2"},{"test1", "test2"},{"test1", "test2"},};
+        model.setColumnIdentifiers(columns);
+        //test data
+        Object[][] data = {{"IdTar1", "NomeTar1"},{"IdTar2", "NomeTar2"},{"IdTar3", "NomeTar3"}};
+        model.addRow(data);
 
-        tartarugheNelCentro = new JTable(data, colonneTable);
+        listaTartarughe.setModel(model);
 
-        JScrollPane scrollPane = new JScrollPane(tartarugheNelCentro);
-        tartarugheNelCentro.setFillsViewportHeight(true);
+        JScrollPane scrollPane = new JScrollPane(listaTartarughe);
 
         Integer[] annoint = new Integer[2023-1979+1];
         Integer[] meseint = new Integer[12+1];
@@ -41,14 +45,16 @@ public class RiammettiTemp extends JFrame {
         for(int i = 1; i <= annoint.length-1; i++){
             annoint[i] = i+1979;
         }
+        conferma = new JButton("conferma");
         anno=new JComboBox<>(annoint);
         mese=new JComboBox<>(meseint);
         giorno=new JComboBox<>(giornoint);
 
-        add(tartarugheNelCentro);
+        add(scrollPane);
         add(anno);
         add(mese);
         add(giorno);
+        add(conferma);
 
         setSize(800, 500);
         setLocationRelativeTo(null);

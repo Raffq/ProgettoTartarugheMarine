@@ -1,4 +1,4 @@
-package Gui;
+package Gui.OperatoreGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,13 +11,16 @@ public class AmmettiTemp extends JFrame {
     private JComboBox mese;
     private JComboBox giorno;
     private JComboBox comboBox;
+    private JButton conferma;
     public AmmettiTemp() {
-        super("Ammetti");
+        super("Ammissione tartaruga");
 
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
         nomeTart=new JTextField(15);
+
+        conferma = new JButton("conferma");
 
         Integer[] annoint = new Integer[2023-1979+1];
         Integer[] meseint = new Integer[12+1];
@@ -36,28 +39,11 @@ public class AmmettiTemp extends JFrame {
         mese=new JComboBox<>(meseint);
         giorno=new JComboBox<>(giornoint);
 
-        /*String[] prova = {"1", "2", "3"};
-
-        comboBox = new JComboBox(prova);*/
-
-        /*int i=1980;
-
-        for(i;i<2023;i++) {
-            anno.add(i);
-        }
-        i=0;
-        for(i;i<12;i++) {
-            mese.add(i);
-        }
-        i=0;
-        for(i;i<31;i++) {
-            giorno.add(i);
-        }*/
-
         add(nomeTart);
         add(anno);
         add(mese);
         add(giorno);
+        add(conferma);
 
         setSize(800, 500);
         setLocationRelativeTo(null);
