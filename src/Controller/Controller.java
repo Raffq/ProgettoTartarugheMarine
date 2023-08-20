@@ -5,11 +5,14 @@ import DAO.Medico_Veterinario.Medico_VeterinarioDAO;
 import DAO.Medico_Veterinario.Medico_VeterinarioDAOImpl;
 import DAO.Operatore.OperatoreDAO;
 import DAO.Operatore.OperatoreDAOImpl;
+import DAO.Ricercatore.RicercatoreDAO;
+import DAO.Ricercatore.RicercatoreDAOImpl;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAO;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAOImpl;
 import Gui.AccediTemp;
 import Gui.MedicoVeterinarioGUI.CompilaCartellaClinicaTemp;
 import Gui.MedicoVeterinarioGUI.CompilaComponentiTemp;
+import Gui.MedicoVeterinarioGUI.Medico_VeterinarioTemp;
 import Gui.OperatoreGUI.AmmettiTemp;
 import Gui.OperatoreGUI.OperatoreTemp;
 import Gui.OperatoreGUI.RiammettiTemp;
@@ -21,9 +24,8 @@ import java.sql.SQLException;
 
 public class Controller {
     AccediTemp accediTemp;
-    OperatoreTemp operatoreTemp;
     public Controller() {}
-        Personale controllaMatricola (String MatricolaTemp) throws SQLException {
+        public Personale controllaMatricola(String MatricolaTemp) throws SQLException {
             if (MatricolaTemp.substring(0, 2).equals("OP")) {
                 OperatoreDAO operatoreDAO = new OperatoreDAOImpl();
                 Personale operatore = operatoreDAO.get(MatricolaTemp);
@@ -40,50 +42,69 @@ public class Controller {
                 Personale medico_veterinario = medico_veterinarioDAO.get(MatricolaTemp);
 
                 return medico_veterinario;
+            } else if (MatricolaTemp.substring(0, 2).equals("RI")) {
+                RicercatoreDAO ricercatoreDAO = new RicercatoreDAOImpl();
+                Personale ricercatore = ricercatoreDAO.get(MatricolaTemp);
+
+                return ricercatore;
             } else {
                 return null;
             }
         }
-
-        void accedi (Personale personale){
+        //accedi
+        public void accedi (Personale personale){
             if (personale instanceof Operatore) {
-                System.out.println("OpenInterfaccia");
+                goToOperatore();
             } else if (personale instanceof Medico_Veterinario) {
-                System.out.println("OpenInterfaccia");
+                goToMedico_Veterinario();
             } else if (personale instanceof Tecnico_Laboratorio) {
-                System.out.println("OpenInterfaccia");
+                goToTecnico_Laboratorio();
+            } else if (personale instanceof Ricercatore) {
+                goToRicercatore();
             }
         }
+
+        public void goToMedico_Veterinario(){
+            Medico_VeterinarioTemp mvt = new Medico_VeterinarioTemp();
+            mvt.setVisible(true);
+        }
+        public void goToOperatore(){
+            OperatoreTemp mvt = new OperatoreTemp();
+            mvt.setVisible(true);
+        }
+        public void goToRicercatore(){
+            Medico_VeterinarioTemp mvt = new Medico_VeterinarioTemp();
+            mvt.setVisible(true);
+        }
+        public void goToTecnico_Laboratorio(){
+            Medico_VeterinarioTemp mvt = new Medico_VeterinarioTemp();
+            mvt.setVisible(true);
+        }
+
         //medico veterinario
-        void goToCompilaCartellaClinica(JFrame frame){
-            frame.dispose();
+        public void goToCompilaCartellaClinica(){
             CompilaCartellaClinicaTemp ccct = new CompilaCartellaClinicaTemp();
             ccct.setVisible(true);
         }
-        void goToCompilaComponenti(JFrame frame) {
-            frame.dispose();
+        public void goToCompilaComponenti() {
             CompilaComponentiTemp cct = new CompilaComponentiTemp();
             cct.setVisible(true);
         }
         //Operatore
-        void goToAmmetti(JFrame frame) {
-            frame.dispose();
+        public void goToAmmetti() {
             AmmettiTemp ammetti = new AmmettiTemp();
             ammetti.setVisible(true);
         }
-        void goToRiammetti(JFrame frame) {
-            frame.dispose();
+        public void goToRiammetti() {
             RiammettiTemp riammetti = new RiammettiTemp();
             riammetti.setVisible(true);
         }
-        void goToRilascia(JFrame frame) {
-            frame.dispose();
+        public void goToRilascia() {
             RilasciaTemp rilasciaTemp = new RilasciaTemp();
             rilasciaTemp.setVisible(true);
         }
         //Ricercatore
-        void goToStatistiche(JFrame frame) {
-            frame.dispose();
+        public void goToStatistiche() {
             VisualizzaStatisticheTemp visualizzaStatistiche = new VisualizzaStatisticheTemp();
             visualizzaStatistiche.setVisible(true);
         }
