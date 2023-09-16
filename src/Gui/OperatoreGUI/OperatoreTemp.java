@@ -2,25 +2,59 @@ package Gui.OperatoreGUI;
 
 import javax.swing.*;
 import java.awt.*;
-@Deprecated
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import Controller.Controller;
+
 public class OperatoreTemp extends JFrame {
-    JPanel panelFinto;
+    private JButton ammetti;
+    private JButton riammetti;
+    private JButton rilascia;
+
     public OperatoreTemp() {
-        super("Operatore");
-        panelFinto=new JPanel();
-        BottoniOperatore bottoniOperatore = new BottoniOperatore();
+        FlowLayout flowLayout=new FlowLayout(FlowLayout.CENTER, 20, 0);
+        setLayout(flowLayout);
 
-        BorderLayout borderLayout=new BorderLayout();
+        ammetti=new JButton("Ammetti");
+        riammetti=new JButton("Riammetti");
+        rilascia=new JButton("Rilascia");
 
-        setLayout(borderLayout);
-        add(panelFinto, borderLayout.PAGE_START);
-        add(bottoniOperatore, borderLayout.CENTER);
+        Controller controller = new Controller();
+
+        ammetti.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                // Chiamare i metodi del controller quando il pulsante viene premuto
+                controller.goToAmmetti();
+            }
+        });
+
+        riammetti.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                // Chiamare i metodi del controller quando il pulsante viene premuto
+                controller.goToRiammetti();
+            }
+        });
+
+        rilascia.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                // Chiamare i metodi del controller quando il pulsante viene premuto
+                controller.goToRilascia();
+            }
+        });
+
+        add(ammetti);
+        add(riammetti);
+        add(rilascia);
 
         setSize(800, 500);
-        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
+
 }
-
-

@@ -2,6 +2,9 @@ package Gui.MedicoVeterinarioGUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import Controller.Controller;
 
 public class Medico_VeterinarioTemp extends JFrame {
     private JButton compilaComponente;
@@ -13,12 +16,30 @@ public class Medico_VeterinarioTemp extends JFrame {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
-        compilaComponente = new JButton();
-        compilaCartellaClinica = new JButton();
-        modificaComponente = new JButton();
-        modificaCartellaClinica = new JButton();
+        compilaComponente = new JButton("Compila componenti");
+        compilaCartellaClinica = new JButton("Compila cartella clinica");
+        modificaComponente = new JButton("Modifica componenti");
+        modificaCartellaClinica = new JButton("Modifica cartella clinica");
 
-        
+        Controller controller = new Controller();
+
+        compilaCartellaClinica.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                // Chiamare i metodi del controller quando il pulsante viene premuto
+                controller.goToCompilaCartellaClinica();
+            }
+        });
+
+        compilaComponente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                // Chiamare i metodi del controller quando il pulsante viene premuto
+                controller.goToCompilaComponenti();
+            }
+        });
 
         add(compilaComponente);
         add(compilaCartellaClinica);

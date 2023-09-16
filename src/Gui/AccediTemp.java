@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.sql.*;
 
 import ClassiPrincipali.*;
+import Controller.Controller;
 import DAO.Medico_Veterinario.Medico_VeterinarioDAO;
 import DAO.Medico_Veterinario.Medico_VeterinarioDAOImpl;
 import DAO.Operatore.OperatoreDAO;
@@ -17,7 +18,7 @@ import Gui.OperatoreGUI.OperatoreTemp;
 public class AccediTemp extends JFrame {
     private JTextField matricola;
     private JButton accedi;
-    Personale ps;
+    private Personale ps;
     public AccediTemp()  {
         super("Accedi");
 
@@ -29,14 +30,15 @@ public class AccediTemp extends JFrame {
         add(accedi, BorderLayout.PAGE_START);
         add(matricola, BorderLayout.CENTER);
 
+        Controller controller = new Controller();
+
         accedi.addActionListener(new ActionListener()  {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ps=null;
                 String matricolatemp = matricola.getText();
                 try {
-                    ps=controllaMatricola(matricolatemp);
-                    accedi(ps);
+                    ps=controller.controllaMatricola(matricolatemp);
+                    controller.accedi(ps);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -50,7 +52,7 @@ public class AccediTemp extends JFrame {
         setVisible(true);
     }
 
-    Personale controllaMatricola(String MatricolaTemp) throws SQLException {
+    /*Personale controllaMatricola(String MatricolaTemp) throws SQLException {
         if (MatricolaTemp.substring(0, 2).equals("OP")) {
             OperatoreDAO operatoreDAO = new OperatoreDAOImpl();
             Personale operatore = operatoreDAO.get(MatricolaTemp);
@@ -73,19 +75,17 @@ public class AccediTemp extends JFrame {
         else {
             return null;
         }
-    }
+    }*/
 
-    void accedi(Personale personale) {
+    /*void accedi(Personale personale) {
         if (personale instanceof Operatore) {
-            OperatoreTemp operatoreTemp1=new OperatoreTemp();
-            operatoreTemp1.show();
-            System.out.println("OpenInterfaccia");
+
         }
         else if (personale instanceof Medico_Veterinario) {
-            System.out.println("OpenInterfaccia");
+
         }
         else if (personale instanceof Tecnico_Laboratorio) {
-            System.out.println("OpenInterfaccia");
+
         }
-    }
+    }*/
 }
