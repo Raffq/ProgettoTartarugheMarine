@@ -23,7 +23,7 @@ import javax.swing.*;
 import java.sql.SQLException;
 
 public class Controller {
-    AccediTemp accediTemp;
+    AccediTemp accediTemp; //TEST
     public Controller() {}
         public Personale controllaMatricola(String MatricolaTemp) throws SQLException {
             if (MatricolaTemp.substring(0, 2).equals("OP")) {
