@@ -42,7 +42,7 @@ public class AccediTemp extends JFrame {
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
-                dispose(); //prova
+                dispose(); //prova2
             }
         });
 
