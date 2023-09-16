@@ -47,7 +47,7 @@ public class AccediTemp extends JFrame {
                     matricola.setText("Matricola Errata!");
                 }
                 else {
-                    dispose();
+                    dispose(); //prova
                 }
             }
         });
