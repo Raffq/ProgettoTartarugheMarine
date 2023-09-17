@@ -3,6 +3,8 @@ package Gui.MedicoVeterinarioGUI;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CompilaCartellaClinicaTemp extends JFrame {
     private JTable listaTartarughe;
@@ -36,6 +38,13 @@ public class CompilaCartellaClinicaTemp extends JFrame {
         peso = new JTextField("peso");
         luogoRitrovamento = new JTextField("luogoRit");
         conferma = new JButton("conferma");
+
+        conferma.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
 
         add(scrollPane);
         add(specie);
