@@ -23,10 +23,11 @@ public class AmmettiTemp extends JFrame {
     /*private JComboBox anno;
     private JComboBox mese;
     private JComboBox giorno;
-
      */
     private JButton conferma;
 
+    private JDatePanelImpl datePanel;
+    private JDatePickerImpl datePicker;
 
     public AmmettiTemp(Personale personale) {
         super("Ammissione tartaruga");
@@ -35,55 +36,26 @@ public class AmmettiTemp extends JFrame {
         setLayout(flowLayout);
 
         nomeTart = new JTextField(15);
-
         conferma = new JButton("conferma");
-
-        /*Integer[] annoint = new Integer[2023 - 1979 + 1];
-        Integer[] meseint = new Integer[12 + 1];
-        Integer[] giornoint = new Integer[31 + 1];
-
-       int annoValue=0;
-        int meseValue=0;
-        int giornoValue=0;
-
-        for (int i = 1; i <= giornoint.length - 1; i++) {
-            giornoint[i] = i;
-        }
-        for (int i = 1; i <= meseint.length - 1; i++) {
-            meseint[i] = i;
-        }
-        for (int i = 1; i <= annoint.length - 1; i++) {
-            annoint[i] = i + 1979;
-        }
-        anno = new JComboBox<>(annoint);
-        mese = new JComboBox<>(meseint);
-        giorno = new JComboBox<>(giornoint);
-
-         annoValue= (int) anno.getSelectedItem();
-        meseValue= (int) mese.getSelectedItem();
-        giornoValue= (int) giorno.getSelectedItem();
-
-
-        add(anno);
-        add(mese);
-        add(giorno);
-
-
-         */
 
         add(nomeTart);
         add(conferma);
 
         UtilDateModel model = new UtilDateModel();
-        JDatePanelImpl datePanel = new JDatePanelImpl(model, new Properties());
-        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        java.util.Date today = new Date();
+        model.setDate(today.getYear(), today.getMonth(), today.getDay());
+        model.setSelected(true);
+        Properties p  = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+
+        datePanel = new JDatePanelImpl(model, p);
+        datePicker = new JDatePickerImpl(datePanel, null);
+        datePicker.setBounds(110, 100, 200, 25);
+        datePicker.setVisible(true);
 
         add(datePicker);
-        Date selectedDate = (Date) datePicker.getModel().getValue();
-
-        Calendar selectedValue = (Calendar) datePicker.getModel().getValue();
-        java.sql.Date sqlDate=new java.sql.Date((java.sql.Date)datePicker.getModel().getValue());
-
 
         setSize(800, 500);
         setLocationRelativeTo(null);
@@ -95,9 +67,8 @@ public class AmmettiTemp extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    System.out.println(nomeTart.getText());
-                    System.out.println(personale.getfkidcentro());
-                    System.out.println(selectedDate);
+                    Date selectedDate = (Date) datePicker.getModel().getValue();
+                    java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
                     operatoreDAOImpl.ammetti(nomeTart.getText(), personale.getfkidcentro(), sqlDate);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);

@@ -21,11 +21,11 @@ public class CompilaCartellaClinicaTemp extends JFrame {
 
         listaTartarughe = new JTable();
         Object[] columns = {"Targhetta", "Nome"};
-        DefaultTableModel model = new DefaultTableModel(columns,10);
+        DefaultTableModel model = new DefaultTableModel();
 
         model.setColumnIdentifiers(columns);
         //test data
-        Object[][] data = {{"IdTar1", "NomeTar1"},{"IdTar2", "NomeTar2"},{"IdTar3", "NomeTar3"}};
+        Object[] data = {"IdTar1","IdTar2","IdTar3"};
         model.addRow(data);
 
         listaTartarughe.setModel(model);
