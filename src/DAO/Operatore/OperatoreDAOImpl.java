@@ -35,21 +35,21 @@ public class OperatoreDAOImpl implements OperatoreDAO {
     }
 
     @Override
-    public void ammetti(String nome, String idCentro, String data) throws SQLException {
+    public void ammetti(String nome, String idCentro, Date data) throws SQLException {
         try {
             Connection con = Database.getConnection();
-            String sql = "CALL ammetti('?', '?', '?')";
+            String sql = "CALL ammetti(?, ?, ?)";
 
             CallableStatement cs = con.prepareCall(sql);
 
             cs.setString(1, nome);
             cs.setString(2, idCentro);
-            cs.setString(3, data);
+            cs.setDate(3, data);
 
             cs.execute();
 
         } catch(SQLException e) {
-            System.out.println("Qualcosa è andato storto!");
+            System.out.println(e.getMessage());
         }
     }
 

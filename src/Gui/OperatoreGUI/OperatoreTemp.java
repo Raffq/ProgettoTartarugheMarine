@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import ClassiPrincipali.Personale;
 import Controller.Controller;
@@ -28,7 +29,7 @@ public class OperatoreTemp extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 // Chiamare i metodi del controller quando il pulsante viene premuto
-                controller.goToAmmetti(personale);
+                    controller.goToAmmetti(personale);
             }
         });
 
