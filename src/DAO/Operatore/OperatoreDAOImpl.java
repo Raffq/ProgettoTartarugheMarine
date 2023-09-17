@@ -35,16 +35,16 @@ public class OperatoreDAOImpl implements OperatoreDAO {
     }
 
     @Override
-    public void ammetti(String nome, String idCentro, Date data) throws SQLException {
+    public void ammetti(String nome, String idCentro, String data) throws SQLException {
         try {
             Connection con = Database.getConnection();
-            String sql = "CALL ammetti(?, ?, ?)";
+            String sql = "CALL ammetti('?', '?', '?')";
 
             CallableStatement cs = con.prepareCall(sql);
 
             cs.setString(1, nome);
             cs.setString(2, idCentro);
-            cs.setDate(3, data);
+            cs.setString(3, data);
 
             cs.execute();
 
@@ -70,7 +70,7 @@ public class OperatoreDAOImpl implements OperatoreDAO {
         }
     }
 
-    public void rilascia(String IdTar, Date data) throws SQLException {
+    public void rilascia(String IdTar, String data) throws SQLException {
         try {
             Connection con = Database.getConnection();
             String sql = "CALL rilascia(?, ?)";
@@ -78,7 +78,7 @@ public class OperatoreDAOImpl implements OperatoreDAO {
             CallableStatement cs = con.prepareCall(sql);
 
             cs.setString(1, IdTar);
-            cs.setDate(2, data);
+            cs.setString(2, data);
 
             cs.execute();
 
