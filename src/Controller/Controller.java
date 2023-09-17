@@ -54,7 +54,7 @@ public class Controller {
         //accedi
         public void accedi (Personale personale){
             if (personale instanceof Operatore) {
-                goToOperatore();
+                goToOperatore(personale);
             } else if (personale instanceof Medico_Veterinario) {
                 goToMedico_Veterinario();
             } else if (personale instanceof Tecnico_Laboratorio) {
@@ -68,8 +68,8 @@ public class Controller {
             Medico_VeterinarioTemp mvt = new Medico_VeterinarioTemp();
             mvt.setVisible(true);
         }
-        public void goToOperatore(){
-            OperatoreTemp mvt = new OperatoreTemp();
+        public void goToOperatore(Personale personale){
+            OperatoreTemp mvt = new OperatoreTemp(personale);
             mvt.setVisible(true);
         }
         public void goToRicercatore(){
@@ -91,8 +91,8 @@ public class Controller {
             cct.setVisible(true);
         }
         //Operatore
-        public void goToAmmetti() {
-            AmmettiTemp ammetti = new AmmettiTemp();
+        public void goToAmmetti(Personale personale) {
+            AmmettiTemp ammetti = new AmmettiTemp(personale);
             ammetti.setVisible(true);
         }
         public void goToRiammetti() {

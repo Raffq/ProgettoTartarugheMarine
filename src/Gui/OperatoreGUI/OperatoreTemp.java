@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import ClassiPrincipali.Personale;
 import Controller.Controller;
 
 public class OperatoreTemp extends JFrame {
@@ -11,7 +13,7 @@ public class OperatoreTemp extends JFrame {
     private JButton riammetti;
     private JButton rilascia;
 
-    public OperatoreTemp() {
+    public OperatoreTemp(Personale personale) {
         FlowLayout flowLayout=new FlowLayout(FlowLayout.CENTER, 20, 0);
         setLayout(flowLayout);
 
@@ -26,7 +28,7 @@ public class OperatoreTemp extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 // Chiamare i metodi del controller quando il pulsante viene premuto
-                controller.goToAmmetti();
+                controller.goToAmmetti(personale);
             }
         });
 

@@ -1,7 +1,17 @@
 package Gui.OperatoreGUI;
 
+import ClassiPrincipali.Operatore;
+import ClassiPrincipali.Personale;
+import DAO.Operatore.OperatoreDAO;
+import DAO.Operatore.OperatoreDAOImpl;
+import java.sql.Date;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.chrono.JapaneseDate;
 import java.util.GregorianCalendar;
 
@@ -12,7 +22,7 @@ public class AmmettiTemp extends JFrame {
     private JComboBox giorno;
     private JComboBox comboBox;
     private JButton conferma;
-    public AmmettiTemp() {
+    public AmmettiTemp(Personale personale) {
         super("Ammissione tartaruga");
 
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
@@ -45,9 +55,31 @@ public class AmmettiTemp extends JFrame {
         add(giorno);
         add(conferma);
 
+        String giornoSt=giorno.toString();
+        String meseSt=mese.toString();
+        String annoSt=anno.toString();
+        String Data = annoSt+'-'+meseSt+'-'+giornoSt;
+
+
         setSize(800, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+
+
+        OperatoreDAOImpl operatoreDAOImpl = new OperatoreDAOImpl();
+        conferma.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    System.out.println(nomeTart.getText());
+                    System.out.println(personale.getfkidcentro());
+                    operatoreDAOImpl.ammetti(nomeTart.getText(), personale.getfkidcentro(), Data);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 }
