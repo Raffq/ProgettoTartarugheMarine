@@ -38,13 +38,14 @@ public class TartarugaDAOImpl implements TartarugaDAO {
         ArrayList<Tartaruga> tartarughe= new ArrayList();
 
         try {
-            String sql = "CALL cursorOfTartarugheNelCentro(?,?)";
+            String sql = " SELECT * FROM Tartaruga WHERE   Fkidcentro = ? AND PresenteNelCentro = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, idCen);
             ps.setBoolean(2, presenteNelCentro);
 
             ResultSet resultSet = ps.executeQuery();
-            if (resultSet.next()) {
+
+            while (resultSet.next()) {
                 String targhetta = resultSet.getString("targhetta");
                 String nome = resultSet.getString("nometartaruga");
                 Boolean presentenelcentro = resultSet.getBoolean("presentenelcentro");
@@ -55,7 +56,7 @@ public class TartarugaDAOImpl implements TartarugaDAO {
                 tartarughe.add(tartaruga);
             }
         } catch (SQLException e) {
-            System.out.println("Qualcosa è andato storto!");
+            System.out.println(e.getMessage());
         }
         return tartarughe;
     }

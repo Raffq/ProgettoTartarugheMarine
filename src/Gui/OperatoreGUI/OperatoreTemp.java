@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import ClassiPrincipali.Personale;
@@ -38,7 +39,11 @@ public class OperatoreTemp extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 // Chiamare i metodi del controller quando il pulsante viene premuto
-                controller.goToRiammetti();
+                try {
+                    controller.goToRiammetti();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 

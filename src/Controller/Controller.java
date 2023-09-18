@@ -100,7 +100,7 @@ public class Controller {
             AmmettiTemp ammetti = new AmmettiTemp(personale);
             ammetti.setVisible(true);
         }
-        public void goToRiammetti() {
+        public void goToRiammetti() throws SQLException {
             RiammettiTemp riammetti = new RiammettiTemp();
             riammetti.setVisible(true);
         }

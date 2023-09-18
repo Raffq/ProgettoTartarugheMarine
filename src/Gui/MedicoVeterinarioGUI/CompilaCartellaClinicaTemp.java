@@ -15,7 +15,7 @@ public class CompilaCartellaClinicaTemp extends JFrame {
     private JTextField luogoRitrovamento;
     private JButton conferma;
     public CompilaCartellaClinicaTemp() {
-        super("Compila cartella clinica tartaruga");
+        /*super("Compila cartella clinica tartaruga");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
@@ -57,5 +57,7 @@ public class CompilaCartellaClinicaTemp extends JFrame {
         setSize(800, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+         */
     }
 }
