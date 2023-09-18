@@ -25,8 +25,8 @@ public class CompilaCartellaClinicaTemp extends JFrame {
 
         model.setColumnIdentifiers(columns);
         //test data
-        Object[] data = {"IdTar1","IdTar2","IdTar3"};
-        model.addRow(data);
+        String[][] data = {{"IdTar1","IdTar2"},{"IdTar3","IdTar4"}};
+        model.addRow();
 
         listaTartarughe.setModel(model);
 

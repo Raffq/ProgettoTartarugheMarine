@@ -70,7 +70,7 @@ public class OperatoreDAOImpl implements OperatoreDAO {
         }
     }
 
-    public void rilascia(String IdTar, String data) throws SQLException {
+    public void rilascia(String IdTar, Date data) throws SQLException {
         try {
             Connection con = Database.getConnection();
             String sql = "CALL rilascia(?, ?)";
@@ -78,7 +78,7 @@ public class OperatoreDAOImpl implements OperatoreDAO {
             CallableStatement cs = con.prepareCall(sql);
 
             cs.setString(1, IdTar);
-            cs.setString(2, data);
+            cs.setDate(2, data);
 
             cs.execute();
 

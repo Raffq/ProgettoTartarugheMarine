@@ -7,6 +7,7 @@ import DAO.Operatore.OperatoreDAO;
 import DAO.Operatore.OperatoreDAOImpl;
 import DAO.Ricercatore.RicercatoreDAO;
 import DAO.Ricercatore.RicercatoreDAOImpl;
+import DAO.Tartaruga.TartarugaDAOImpl;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAO;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAOImpl;
 import Gui.AccediTemp;
@@ -20,8 +21,11 @@ import Gui.OperatoreGUI.RilasciaTemp;
 import Gui.RicercatoreGUI.VisualizzaStatisticheTemp;
 
 import javax.swing.*;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     AccediTemp accediTemp; //TEST
@@ -64,7 +68,7 @@ public class Controller {
                 goToRicercatore();
             }
         }
-
+        //schermate principali
         public void goToMedico_Veterinario(){
             Medico_VeterinarioTemp mvt = new Medico_VeterinarioTemp();
             mvt.setVisible(true);
@@ -108,5 +112,25 @@ public class Controller {
         public void goToStatistiche() {
             VisualizzaStatisticheTemp visualizzaStatistiche = new VisualizzaStatisticheTemp();
             visualizzaStatistiche.setVisible(true);
+        }
+        //metodi Operatore
+        public void ammetti(String nome, String idCentro, Date data) throws SQLException {
+            OperatoreDAOImpl operatoreDAO = new OperatoreDAOImpl();
+            operatoreDAO.ammetti(nome, idCentro, data);
+        }
+        public void riammetti(String idTar, Date data) throws SQLException {
+            OperatoreDAOImpl operatoreDAO = new OperatoreDAOImpl();
+            operatoreDAO.rilascia(idTar, data);
+        }
+        public void rilascia(String idTar, Date data) throws SQLException {
+            OperatoreDAOImpl operatoreDAO = new OperatoreDAOImpl();
+            operatoreDAO.rilascia(idTar, data);
+        }
+        //tartarughe metodi
+        public ArrayList<Tartaruga> getTartarugheNelCentro(String idCen, boolean presenteNelCentro) throws SQLException {
+            ArrayList<Tartaruga> tartarughe = new ArrayList<>();
+            TartarugaDAOImpl tartarugaDAO = new TartarugaDAOImpl();
+            tartarughe = tartarugaDAO.getTartarugheNelCentro(idCen, presenteNelCentro);
+            return tartarughe;
         }
 }

@@ -17,15 +17,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
+import Controller.Controller;
 
 public class AmmettiTemp extends JFrame {
     private JTextField nomeTart;
-    /*private JComboBox anno;
-    private JComboBox mese;
-    private JComboBox giorno;
-     */
     private JButton conferma;
-
     private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
 
@@ -46,7 +42,7 @@ public class AmmettiTemp extends JFrame {
         model.setDate(today.getYear(), today.getMonth(), today.getDay());
         model.setSelected(true);
         Properties p  = new Properties();
-        p.put("text.today", "Today");
+        p.put("text.day", "Day");
         p.put("text.month", "Month");
         p.put("text.year", "Year");
 
@@ -62,14 +58,14 @@ public class AmmettiTemp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-        OperatoreDAOImpl operatoreDAOImpl = new OperatoreDAOImpl();
+        Controller controller = new Controller();
         conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     Date selectedDate = (Date) datePicker.getModel().getValue();
                     java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
-                    operatoreDAOImpl.ammetti(nomeTart.getText(), personale.getfkidcentro(), sqlDate);
+                    controller.ammetti(nomeTart.getText(), personale.getfkidcentro(), sqlDate);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

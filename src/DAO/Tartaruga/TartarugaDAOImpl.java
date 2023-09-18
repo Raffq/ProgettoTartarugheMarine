@@ -5,7 +5,6 @@ import DAO.*;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TartarugaDAOImpl implements TartarugaDAO {
@@ -34,7 +33,7 @@ public class TartarugaDAOImpl implements TartarugaDAO {
     }
 
     @Override
-    public List<Tartaruga> getTartarugheNelCentro(String idCen, boolean presenteNelCentro) throws SQLException {
+    public ArrayList<Tartaruga> getTartarugheNelCentro(String idCen, boolean presenteNelCentro) throws SQLException {
         Connection con = Database.getConnection();
         ArrayList<Tartaruga> tartarughe= new ArrayList();
 
