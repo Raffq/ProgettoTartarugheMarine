@@ -38,7 +38,7 @@ public class TartarugaDAOImpl implements TartarugaDAO {
         ArrayList<Tartaruga> tartarughe= new ArrayList();
 
         try {
-            String sql = " SELECT * FROM Tartaruga WHERE   Fkidcentro = ? AND PresenteNelCentro = ?";
+            String sql = " SELECT * FROM Tartaruga WHERE Fkidcentro = ? AND PresenteNelCentro = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, idCen);
             ps.setBoolean(2, presenteNelCentro);

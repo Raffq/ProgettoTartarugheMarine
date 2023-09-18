@@ -15,13 +15,8 @@ public class Main {
         for (Tartaruga i: tartarughe) {
             System.out.println(i.getTarghetta());
         }
+*/
 
-         */
-        /*System.out.println(tartarughe.get(0).getTarghetta());
-        System.out.println(tartarughe.get(1).getTarghetta());
-        System.out.println(tartarughe.get(2).getTarghetta());
-
-         */
 
 
 
