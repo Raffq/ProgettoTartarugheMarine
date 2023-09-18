@@ -16,11 +16,8 @@ public class Main {
             System.out.println(i.getTarghetta());
         }
 */
-
-
-
-
-        RiammettiTemp riammettiTemp=new RiammettiTemp();
+        AccediTemp accedi = new AccediTemp();
+        //RiammettiTemp riammettiTemp=new RiammettiTemp();
 
         //prova
     }

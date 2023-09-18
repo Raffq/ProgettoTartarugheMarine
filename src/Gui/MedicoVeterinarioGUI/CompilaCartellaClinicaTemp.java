@@ -21,7 +21,7 @@ public class CompilaCartellaClinicaTemp extends JFrame {
     private JTextField luogoRitrovamento;
     private JButton conferma;
     public CompilaCartellaClinicaTemp(Personale personale) throws SQLException {
-        /*super("Compila cartella clinica tartaruga");
+        super("Compila cartella clinica tartaruga");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
@@ -29,14 +29,20 @@ public class CompilaCartellaClinicaTemp extends JFrame {
 
         listaTartarughe = new JTable();
         Object[] columns = {"Targhetta", "Nome"};
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
 
         model.setColumnIdentifiers(columns);
         ArrayList<Tartaruga> data = new ArrayList<>();
         data = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
 
         for(Tartaruga i : data){
-            model.addRow(new Object[]{i});
+            model.addRow(new Object[]{i.getTarghetta(), i.getNomeTartaruga()});
         }
 
         listaTartarughe.setModel(model);
@@ -53,7 +59,21 @@ public class CompilaCartellaClinicaTemp extends JFrame {
         conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String tartarugaScelta = (String) listaTartarughe.getValueAt(listaTartarughe.getSelectedRow(), 0);
+                String specieScelta = specie.getText();
+                    String lunghezzaSceltaTemp = lunghezza.getText();
+                int lunghezzaScelta = Integer.parseInt(lunghezzaSceltaTemp);
+                    String larghezzaSceltaTemp = larghezza.getText();
+                int larghezzaScelta = Integer.parseInt(larghezzaSceltaTemp);
+                    String pesoSceltoTemp = peso.getText();
+                int pesoScelto = Integer.parseInt(pesoSceltoTemp);
+                String luogoRitrovamentoScelto = luogoRitrovamento.getText();
 
+                try {
+                    controller.compileLastCartellaClinica(tartarugaScelta, specieScelta,lunghezzaScelta, larghezzaScelta, pesoScelto, luogoRitrovamentoScelto, personale.getMatricola());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -69,6 +89,5 @@ public class CompilaCartellaClinicaTemp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-         */
     }
 }

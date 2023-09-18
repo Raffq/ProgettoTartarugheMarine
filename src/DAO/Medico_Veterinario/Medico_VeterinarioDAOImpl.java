@@ -33,19 +33,20 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
         return medico_veterinario;
     }
 
-    public void compileLastCartellaClinica(String idTartaruga, int lunghezza, int larghezza, int peso, String luogo_ritrovamento, String matricola) throws SQLException {
+    public void compileLastCartellaClinica(String idTartaruga, String specie, int lunghezza, int larghezza, int peso, String luogo_ritrovamento, String matricola) throws SQLException {
         try {
             Connection con = Database.getConnection();
-            String sql = "CALL compileLastCartellaClinica(?, ?, ?, ?, ?, ?)";
+            String sql = "CALL compileLastCartellaClinica(?, ?, ?, ?, ?, ?, ?)";
 
             CallableStatement cs = con.prepareCall(sql);
 
             cs.setString(1, idTartaruga);
-            cs.setInt(2, lunghezza);
-            cs.setInt(3, larghezza);
-            cs.setInt(4, peso);
-            cs.setString(5, luogo_ritrovamento);
-            cs.setString(6, matricola);
+            cs.setString(2, specie);
+            cs.setInt(3, lunghezza);
+            cs.setInt(4, larghezza);
+            cs.setInt(5, peso);
+            cs.setString(6, luogo_ritrovamento);
+            cs.setString(7, matricola);
 
             cs.execute();
 
@@ -76,19 +77,20 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
             System.out.println("Qualcosa è andato storto!");
         }
     }
-    public void updateCartellaClinica(String idCartellaClinica, int lunghezza, int larghezza, int peso, String luogo_ritrovamento, String matricola) throws SQLException {
+    public void updateCartellaClinica(String idCartellaClinica, String specie, int lunghezza, int larghezza, int peso, String luogo_ritrovamento, String matricola) throws SQLException {
         try {
             Connection con = Database.getConnection();
-            String sql = "CALL ammetti(?, ?, ?)";
+            String sql = "CALL updateCartellaClinica(?, ?, ?, ?, ?, ?, ?)";
 
             CallableStatement cs = con.prepareCall(sql);
 
             cs.setString(1, idCartellaClinica);
-            cs.setInt(2, lunghezza);
-            cs.setInt(3, larghezza);
-            cs.setInt(4, peso);
-            cs.setString(5, luogo_ritrovamento);
-            cs.setString(6, matricola);
+            cs.setString(2, specie);
+            cs.setInt(3, lunghezza);
+            cs.setInt(4, larghezza);
+            cs.setInt(5, peso);
+            cs.setString(6, luogo_ritrovamento);
+            cs.setString(7, matricola);
 
             cs.execute();
 
@@ -99,7 +101,7 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
     public void updateComponenti(String idComponenti, Date dataCompilazione, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso) throws SQLException {
         try {
             Connection con = Database.getConnection();
-            String sql = "CALL ammetti(?, ?, ?)";
+            String sql = "CALL updateComponenti(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             CallableStatement cs = con.prepareCall(sql);
 

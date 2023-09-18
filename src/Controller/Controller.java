@@ -135,4 +135,21 @@ public class Controller {
             tartarughe = tartarugaDAO.getTartarugheNelCentro(idCen, presenteNelCentro);
             return tartarughe;
         }
+        //medico veterinario metodi
+        public void compileLastCartellaClinica(String idTartaruga, String specie, int lunghezza, int larghezza, int peso, String luogo_ritrovamento, String matricola) throws SQLException {
+            Medico_VeterinarioDAOImpl medicoVeterinarioDAO = new Medico_VeterinarioDAOImpl();
+            medicoVeterinarioDAO.compileLastCartellaClinica(idTartaruga, specie, lunghezza, larghezza, peso, luogo_ritrovamento, matricola);
+        }
+        public void compileComponenti(String idTartaruga, Date dataCompilazione, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso) throws SQLException {
+            Medico_VeterinarioDAOImpl medicoVeterinarioDAO = new Medico_VeterinarioDAOImpl();
+            medicoVeterinarioDAO.compileComponenti(idTartaruga, dataCompilazione, descBecco, descCollo, descTesta, descCoda, descPinne, descOcchi, descNaso);
+        }
+        public void updateCartellaClinica(String idCartellaClinica, String specie, int lunghezza, int larghezza, int peso, String luogo_ritrovamento, String matricola) throws SQLException {
+            Medico_VeterinarioDAOImpl medicoVeterinarioDAO = new Medico_VeterinarioDAOImpl();
+            medicoVeterinarioDAO.updateCartellaClinica(idCartellaClinica, specie, lunghezza, larghezza, peso, luogo_ritrovamento, matricola);
+        }
+        public void updateComponenti(String idComponenti, Date dataCompilazione, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso) throws SQLException {
+            Medico_VeterinarioDAOImpl medicoVeterinarioDAO = new Medico_VeterinarioDAOImpl();
+            medicoVeterinarioDAO.updateComponenti(idComponenti, dataCompilazione, descBecco, descCollo, descTesta, descCoda, descPinne, descOcchi, descNaso);
+        }
 }
