@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
+import ClassiPrincipali.Personale;
 import Controller.Controller;
 
 public class Medico_VeterinarioTemp extends JFrame {
@@ -11,7 +14,7 @@ public class Medico_VeterinarioTemp extends JFrame {
     private JButton compilaCartellaClinica;
     private JButton modificaComponente;
     private JButton modificaCartellaClinica;
-    public Medico_VeterinarioTemp(){
+    public Medico_VeterinarioTemp(Personale personale){
         super("Medico veterinario");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
@@ -28,7 +31,11 @@ public class Medico_VeterinarioTemp extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 // Chiamare i metodi del controller quando il pulsante viene premuto
-                controller.goToCompilaCartellaClinica();
+                try {
+                    controller.goToCompilaCartellaClinica(personale);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 

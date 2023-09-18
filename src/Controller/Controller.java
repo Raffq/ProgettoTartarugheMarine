@@ -18,7 +18,9 @@ import Gui.OperatoreGUI.AmmettiTemp;
 import Gui.OperatoreGUI.OperatoreTemp;
 import Gui.OperatoreGUI.RiammettiTemp;
 import Gui.OperatoreGUI.RilasciaTemp;
+import Gui.RicercatoreGUI.RicercatoreTemp;
 import Gui.RicercatoreGUI.VisualizzaStatisticheTemp;
+import Gui.TecnicoLaboratorioGUI.Tecnico_LaboratorioTemp;
 
 import javax.swing.*;
 import java.sql.Date;
@@ -61,7 +63,7 @@ public class Controller {
             if (personale instanceof Operatore) {
                 goToOperatore(personale);
             } else if (personale instanceof Medico_Veterinario) {
-                goToMedico_Veterinario();
+                goToMedico_Veterinario(personale);
             } else if (personale instanceof Tecnico_Laboratorio) {
                 goToTecnico_Laboratorio();
             } else if (personale instanceof Ricercatore) {
@@ -69,8 +71,8 @@ public class Controller {
             }
         }
         //schermate principali
-        public void goToMedico_Veterinario(){
-            Medico_VeterinarioTemp mvt = new Medico_VeterinarioTemp();
+        public void goToMedico_Veterinario(Personale personale){
+            Medico_VeterinarioTemp mvt = new Medico_VeterinarioTemp(personale);
             mvt.setVisible(true);
         }
         public void goToOperatore(Personale personale){
@@ -78,17 +80,17 @@ public class Controller {
             mvt.setVisible(true);
         }
         public void goToRicercatore(){
-            Medico_VeterinarioTemp mvt = new Medico_VeterinarioTemp();
-            mvt.setVisible(true);
+            RicercatoreTemp ri = new RicercatoreTemp();
+            ri.setVisible(true);
         }
         public void goToTecnico_Laboratorio(){
-            Medico_VeterinarioTemp mvt = new Medico_VeterinarioTemp();
-            mvt.setVisible(true);
+            Tecnico_LaboratorioTemp tl = new Tecnico_LaboratorioTemp();
+            tl.setVisible(true);
         }
 
         //medico veterinario
-        public void goToCompilaCartellaClinica(){
-            CompilaCartellaClinicaTemp ccct = new CompilaCartellaClinicaTemp();
+        public void goToCompilaCartellaClinica(Personale personale) throws SQLException {
+            CompilaCartellaClinicaTemp ccct = new CompilaCartellaClinicaTemp(personale);
             ccct.setVisible(true);
         }
         public void goToCompilaComponenti() {
