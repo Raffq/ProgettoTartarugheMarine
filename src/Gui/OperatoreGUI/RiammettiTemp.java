@@ -1,4 +1,5 @@
 package Gui.OperatoreGUI;
+import ClassiPrincipali.Personale;
 import ClassiPrincipali.Tartaruga;
 import Controller.Controller;
 import DAO.Operatore.OperatoreDAOImpl;
@@ -25,13 +26,13 @@ public class RiammettiTemp extends JFrame {
     private JDatePickerImpl datePicker;
 
 
-    public RiammettiTemp() throws SQLException {
+    public RiammettiTemp(Personale personale) throws SQLException {
         super("Riammissione tartaruga");
 
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
-
         Controller controller=new Controller();
+
         DefaultTableModel tableModel = new DefaultTableModel();
         JTable table = new JTable(tableModel);
         tableModel.addColumn("Targhetta");
@@ -39,16 +40,15 @@ public class RiammettiTemp extends JFrame {
 
         add(new JScrollPane(table));
 
-        ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro("CN-SMRLD", false);
+        ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), false);
 
         for (Tartaruga i: tartarughe) {
             tableModel.addRow(new Object[] { i.getTarghetta() , i.getNomeTartaruga()});
         }
 
+        int column = 0;
+        int row = table.getSelectedRow();
 
-
-
-        /*
         UtilDateModel modelDate = new UtilDateModel();
         java.util.Date today = new Date();
         modelDate.setDate(today.getYear(), today.getMonth(), today.getDay());
@@ -63,32 +63,29 @@ public class RiammettiTemp extends JFrame {
         datePicker.setBounds(110, 100, 200, 25);
         datePicker.setVisible(true);
         add(datePicker);
-         */
 
         conferma = new JButton("conferma");
         add(conferma);
-
 
         setSize(800, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-        /*
-        OperatoreDAOImpl operatoreDAOImpl = new OperatoreDAOImpl();
-        conferma.addActionListener(new ActionListener() {
+       OperatoreDAOImpl operatoreDAOImpl = new OperatoreDAOImpl();
+       conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    Date selectedDate = (Date) datePicker.getModel().getValue();
-                    java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
-                    operatoreDAOImpl.riammetti(, sqlDate);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
+                String selectedCellValue = (String) table.getValueAt(table.getSelectedRow() , table.getSelectedColumn());
+                System.out.println(selectedCellValue);
+                Date selectedDate = (Date) datePicker.getModel().getValue();
+                java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
+                //controller.ammetti(nomeTart.getText(), personale.getfkidcentro(), sqlDate);
             }
-        });*/
-
+       });
     }
-
 }
+
+
+
+//operatoreDAOImpl.riammetti(,sqlDate);

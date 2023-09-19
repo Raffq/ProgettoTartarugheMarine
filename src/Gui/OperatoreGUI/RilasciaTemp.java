@@ -1,8 +1,14 @@
 package Gui.OperatoreGUI;
 
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.Date;
+import java.util.Properties;
 
 public class RilasciaTemp extends JFrame {
     private JTable listaTartarughe;
@@ -10,6 +16,8 @@ public class RilasciaTemp extends JFrame {
     private JComboBox mese;
     private JComboBox giorno;
     private JButton conferma;
+    private JDatePanelImpl datePanel;
+    private JDatePickerImpl datePicker;
 
 
     public RilasciaTemp(){
@@ -18,41 +26,29 @@ public class RilasciaTemp extends JFrame {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
-        listaTartarughe = new JTable();
-        Object[] columns = {"Targhetta", "Nome"};
-        DefaultTableModel model = new DefaultTableModel(columns,10);
+        DefaultTableModel tableModel = new DefaultTableModel();
+        JTable table = new JTable(tableModel);
+        tableModel.addColumn("Targhetta");
+        tableModel.addColumn("Nome");
 
-        model.setColumnIdentifiers(columns);
-        //test data
-        Object[][] data = {{"IdTar1", "NomeTar1"},{"IdTar2", "NomeTar2"},{"IdTar3", "NomeTar3"}};
-        model.addRow(data);
+        add(new JScrollPane(table));
 
-        listaTartarughe.setModel(model);
+        UtilDateModel modelDate = new UtilDateModel();
+        java.util.Date today = new Date();
+        modelDate.setDate(today.getYear(), today.getMonth(), today.getDay());
+        modelDate.setSelected(true);
+        Properties p  = new Properties();
+        p.put("text.day", "Day");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
 
-        JScrollPane scrollPane = new JScrollPane(listaTartarughe);
+        datePanel = new JDatePanelImpl(modelDate, p);
+        datePicker = new JDatePickerImpl(datePanel, null);
+        datePicker.setBounds(110, 100, 200, 25);
+        datePicker.setVisible(true);
+        add(datePicker);
 
-        Integer[] annoint = new Integer[2023-1979+1];
-        Integer[] meseint = new Integer[12+1];
-        Integer[] giornoint = new Integer[31+1];
-
-        for(int i = 1; i <= giornoint.length-1; i++){
-            giornoint[i] = i;
-        }
-        for(int i = 1; i <= meseint.length-1; i++){
-            meseint[i] = i;
-        }
-        for(int i = 1; i <= annoint.length-1; i++){
-            annoint[i] = i+1979;
-        }
         conferma = new JButton("conferma");
-        anno=new JComboBox<>(annoint);
-        mese=new JComboBox<>(meseint);
-        giorno=new JComboBox<>(giornoint);
-
-        add(scrollPane);
-        add(anno);
-        add(mese);
-        add(giorno);
         add(conferma);
 
         setSize(800, 500);

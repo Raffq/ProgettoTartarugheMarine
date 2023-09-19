@@ -102,8 +102,8 @@ public class Controller {
             AmmettiTemp ammetti = new AmmettiTemp(personale);
             ammetti.setVisible(true);
         }
-        public void goToRiammetti() throws SQLException {
-            RiammettiTemp riammetti = new RiammettiTemp();
+        public void goToRiammetti(Personale personale) throws SQLException {
+            RiammettiTemp riammetti = new RiammettiTemp(personale);
             riammetti.setVisible(true);
         }
         public void goToRilascia() {

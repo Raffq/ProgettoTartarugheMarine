@@ -40,7 +40,7 @@ public class OperatoreTemp extends JFrame {
                 dispose();
                 // Chiamare i metodi del controller quando il pulsante viene premuto
                 try {
-                    controller.goToRiammetti();
+                    controller.goToRiammetti(personale);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
