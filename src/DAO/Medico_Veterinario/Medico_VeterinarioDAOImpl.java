@@ -74,7 +74,7 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
             cs.execute();
 
         } catch(SQLException e) {
-            System.out.println("Qualcosa è andato storto!");
+            //System.out.println("Qualcosa è andato storto!");
         }
     }
     public void updateCartellaClinica(String idCartellaClinica, String specie, int lunghezza, int larghezza, int peso, String luogo_ritrovamento, String matricola) throws SQLException {
@@ -118,7 +118,7 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
             cs.execute();
 
         } catch(SQLException e) {
-            System.out.println("Qualcosa è andato storto!");
+            System.out.println(e.getMessage());
         }
     }
 }

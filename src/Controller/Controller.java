@@ -93,8 +93,8 @@ public class Controller {
             CompilaCartellaClinicaTemp ccct = new CompilaCartellaClinicaTemp(personale);
             ccct.setVisible(true);
         }
-        public void goToCompilaComponenti() {
-            CompilaComponentiTemp cct = new CompilaComponentiTemp();
+        public void goToCompilaComponenti(Personale personale) throws SQLException {
+            CompilaComponentiTemp cct = new CompilaComponentiTemp(personale);
             cct.setVisible(true);
         }
         //Operatore
@@ -106,8 +106,8 @@ public class Controller {
             RiammettiTemp riammetti = new RiammettiTemp(personale);
             riammetti.setVisible(true);
         }
-        public void goToRilascia() {
-            RilasciaTemp rilasciaTemp = new RilasciaTemp();
+        public void goToRilascia(Personale personale) throws SQLException {
+            RilasciaTemp rilasciaTemp = new RilasciaTemp(personale);
             rilasciaTemp.setVisible(true);
         }
         //Ricercatore
@@ -122,7 +122,7 @@ public class Controller {
         }
         public void riammetti(String idTar, Date data) throws SQLException {
             OperatoreDAOImpl operatoreDAO = new OperatoreDAOImpl();
-            operatoreDAO.rilascia(idTar, data);
+            operatoreDAO.riammetti(idTar, data);
         }
         public void rilascia(String idTar, Date data) throws SQLException {
             OperatoreDAOImpl operatoreDAO = new OperatoreDAOImpl();

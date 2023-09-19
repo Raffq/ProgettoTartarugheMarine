@@ -52,7 +52,11 @@ public class OperatoreTemp extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 // Chiamare i metodi del controller quando il pulsante viene premuto
-                controller.goToRilascia();
+                try {
+                    controller.goToRilascia(personale);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 

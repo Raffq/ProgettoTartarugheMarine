@@ -20,8 +20,6 @@ import java.util.Properties;
 public class RiammettiTemp extends JFrame {
     private JTable listaTartarughe;
     private JButton conferma;
-    String[] colonneTable;
-    Object[][] data;
     private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
 
@@ -33,21 +31,24 @@ public class RiammettiTemp extends JFrame {
         setLayout(flowLayout);
         Controller controller=new Controller();
 
-        DefaultTableModel tableModel = new DefaultTableModel();
-        JTable table = new JTable(tableModel);
+        DefaultTableModel tableModel = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //all cells false
+                return false;
+            }
+        };
+        listaTartarughe = new JTable(tableModel);
         tableModel.addColumn("Targhetta");
         tableModel.addColumn("Nome");
 
-        add(new JScrollPane(table));
+        add(new JScrollPane(listaTartarughe));
 
         ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), false);
 
         for (Tartaruga i: tartarughe) {
             tableModel.addRow(new Object[] { i.getTarghetta() , i.getNomeTartaruga()});
         }
-
-        int column = 0;
-        int row = table.getSelectedRow();
 
         UtilDateModel modelDate = new UtilDateModel();
         java.util.Date today = new Date();
@@ -72,15 +73,17 @@ public class RiammettiTemp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-       OperatoreDAOImpl operatoreDAOImpl = new OperatoreDAOImpl();
        conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedCellValue = (String) table.getValueAt(table.getSelectedRow() , table.getSelectedColumn());
-                System.out.println(selectedCellValue);
+                String selectedCellValue = (String) listaTartarughe.getValueAt(listaTartarughe.getSelectedRow() , 0);
                 Date selectedDate = (Date) datePicker.getModel().getValue();
                 java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
-                //controller.ammetti(nomeTart.getText(), personale.getfkidcentro(), sqlDate);
+                try {
+                    controller.riammetti(selectedCellValue, sqlDate);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
        });
     }
