@@ -10,7 +10,7 @@ public class Tecnico_LaboratorioTemp extends JFrame {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
-        aggiungiVasca = new JButton();
+        aggiungiVasca = new JButton("Aggiungi Vasca");
 
         add(aggiungiVasca);
 

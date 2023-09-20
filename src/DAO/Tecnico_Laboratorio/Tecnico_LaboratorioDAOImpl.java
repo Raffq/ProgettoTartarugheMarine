@@ -21,7 +21,7 @@ public class Tecnico_LaboratorioDAOImpl implements Tecnico_LaboratorioDAO {
         ps.setString(1, id);
         ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
-                String matricola = resultSet.getString("matricolarc");
+                String matricola = resultSet.getString("matricolatl");
                 String nome = resultSet.getString("nome");
                 String cognome = resultSet.getString("cognome");
                 String fkidcentro = resultSet.getString("fkidcentro");
