@@ -22,3 +22,22 @@ public class Main {
         //prova
     }
 }
+
+    /*CREATE OR REPLACE PROCEDURE compilecomponenti(IdTar varchar(60), descbecco condizione,desccollo condizione,desctesta condizione,descpinne condizione,descocchi condizione,descnasco condizione, dataCompilazione date) AS
+        $$
+        BEGIN
+        UPDATE Componenti
+        SET DescrizioneBecco = descBecco,
+        DescrizioneCollo = descCollo,
+        DescrizioneTesta = descTesta,
+        DescrizioneCoda = descCoda,
+        DescrizionePinne = descPinne,
+        DescrizioneOcchi = descOcchi,
+        DescrizioneNaso = descNaso,
+        dataCompilazione = dataCompilazione
+        WHERE Targhetta = idTar;
+        END;
+        $$
+        language plpgsql
+
+     */
