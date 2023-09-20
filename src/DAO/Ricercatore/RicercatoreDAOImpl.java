@@ -15,13 +15,13 @@ public class RicercatoreDAOImpl implements RicercatoreDAO {
         Connection con = Database.getConnection();
         Ricercatore ricercatore = null;
         try{
-        String sql = "Select * From ricercatore Where matricolarc = ?"; //TODO: cambiare nel database il nome da matricolaric a matricolarc
+        String sql = "Select * From ricercatore Where matricolaric = ?"; //TODO: cambiare nel database il nome da matricolaric a matricolarc
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setString(1, id);
         ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
-                String matricola = resultSet.getString("matricolarc");
+                String matricola = resultSet.getString("matricolaric");
                 String nome = resultSet.getString("nome");
                 String cognome = resultSet.getString("cognome");
                 String fkidcentro = resultSet.getString("fkidcentro");
