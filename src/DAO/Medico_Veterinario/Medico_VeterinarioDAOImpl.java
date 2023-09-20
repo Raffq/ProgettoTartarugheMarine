@@ -54,27 +54,27 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
             System.out.println("Qualcosa è andato storto!");
         }
     }
-    public void compileComponenti(String idTartaruga, Date dataCompilazione, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso) throws SQLException {
+    public void compileComponenti(String idTartaruga, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso, Date dataCompilazione) throws SQLException {
         try {
             Connection con = Database.getConnection();
-            String sql = "CALL compileComponenti(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "CALL compilecomponenti(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             CallableStatement cs = con.prepareCall(sql);
 
             cs.setString(1, idTartaruga);
-            cs.setDate(2, dataCompilazione);
+            cs.setString(2, descTesta);
             cs.setString(3, descBecco);
             cs.setString(4, descCoda);
             cs.setString(5, descCollo);
             cs.setString(6, descNaso);
             cs.setString(7, descOcchi);
             cs.setString(8, descPinne);
-            cs.setString(9, descTesta);
+            cs.setDate(9, dataCompilazione);
 
             cs.execute();
 
         } catch(SQLException e) {
-            //System.out.println("Qualcosa è andato storto!");
+            System.out.println(e.getMessage());
         }
     }
     public void updateCartellaClinica(String idCartellaClinica, String specie, int lunghezza, int larghezza, int peso, String luogo_ritrovamento, String matricola) throws SQLException {

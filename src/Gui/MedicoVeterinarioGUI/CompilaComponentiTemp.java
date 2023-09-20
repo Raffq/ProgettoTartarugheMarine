@@ -114,8 +114,9 @@ public class CompilaComponentiTemp extends JFrame {
                 String selectedCondizionePinne = (String) condizionePinne.getSelectedItem();
                 String selectedCondizioneOcchi = (String) condizioneOcchi.getSelectedItem();
                 String selectedCondizioneNaso = (String) condizioneNaso.getSelectedItem();
+                System.out.println(sqlDate.toString());
                 try {
-                    controller.compileComponenti(selectedCellValue, sqlDate, selectedCondizioneBecco, selectedCondizioneCollo, selectedCondizioneTesta, selectedCondizioneCoda, selectedCondizionePinne, selectedCondizioneOcchi, selectedCondizioneNaso);
+                    controller.compileComponenti(selectedCellValue, selectedCondizioneBecco, selectedCondizioneCollo, selectedCondizioneTesta, selectedCondizioneCoda, selectedCondizionePinne, selectedCondizioneOcchi, selectedCondizioneNaso, sqlDate);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

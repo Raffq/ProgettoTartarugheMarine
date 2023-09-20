@@ -140,9 +140,9 @@ public class Controller {
             Medico_VeterinarioDAOImpl medicoVeterinarioDAO = new Medico_VeterinarioDAOImpl();
             medicoVeterinarioDAO.compileLastCartellaClinica(idTartaruga, specie, lunghezza, larghezza, peso, luogo_ritrovamento, matricola);
         }
-        public void compileComponenti(String idTartaruga, Date dataCompilazione, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso) throws SQLException {
+        public void compileComponenti(String idTartaruga, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso, Date dataCompilazione) throws SQLException {
             Medico_VeterinarioDAOImpl medicoVeterinarioDAO = new Medico_VeterinarioDAOImpl();
-            medicoVeterinarioDAO.compileComponenti(idTartaruga, dataCompilazione, descBecco, descCollo, descTesta, descCoda, descPinne, descOcchi, descNaso);
+            medicoVeterinarioDAO.compileComponenti(idTartaruga, descBecco, descCollo, descTesta, descCoda, descPinne, descOcchi, descNaso, dataCompilazione);
         }
         public void updateCartellaClinica(String idCartellaClinica, String specie, int lunghezza, int larghezza, int peso, String luogo_ritrovamento, String matricola) throws SQLException {
             Medico_VeterinarioDAOImpl medicoVeterinarioDAO = new Medico_VeterinarioDAOImpl();
