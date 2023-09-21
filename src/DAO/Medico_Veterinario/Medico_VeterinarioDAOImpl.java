@@ -54,22 +54,22 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
             System.out.println("Qualcosa è andato storto!");
         }
     }
-    public void compileComponenti(String idTartaruga, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso, Date dataCompilazione) throws SQLException {
+    public void compileComponenti(String idTartaruga, Date dataCompilazione, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso) throws SQLException {
         try {
             Connection con = Database.getConnection();
-            String sql = "CALL compilecomponenti(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "CALL compilecomponenti(?, ?, ?::condizione, ?::condizione, ?::condizione, ?::condizione, ?::condizione, ?::condizione, ?::condizione)";
 
             CallableStatement cs = con.prepareCall(sql);
 
             cs.setString(1, idTartaruga);
-            cs.setString(2, descTesta);
+            cs.setDate(2, dataCompilazione);
             cs.setString(3, descBecco);
-            cs.setString(4, descCoda);
-            cs.setString(5, descCollo);
-            cs.setString(6, descNaso);
-            cs.setString(7, descOcchi);
-            cs.setString(8, descPinne);
-            cs.setDate(9, dataCompilazione);
+            cs.setString(4, descCollo);
+            cs.setString(5, descTesta);
+            cs.setString(6, descCoda);
+            cs.setString(7, descPinne);
+            cs.setString(8, descOcchi);
+            cs.setString(9, descNaso);
 
             cs.execute();
 

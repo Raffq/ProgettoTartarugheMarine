@@ -35,7 +35,7 @@ public class Main {
         DescrizioneOcchi = descOcchi,
         DescrizioneNaso = descNaso,
         dataCompilazione = dataCompilazione
-        WHERE Targhetta = idTar;
+        WHERE fkTarghetta = idTar;
         END;
         $$
         language plpgsql
