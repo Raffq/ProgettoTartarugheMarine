@@ -23,12 +23,12 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
                 String matricolamv = rs.getString("matricolamv");
                 String nome = rs.getString("nome");
                 String cognome = rs.getString("cognome");
-                String fkidcentro=rs.getString("fkidcentro");
+                String fkidcentro = rs.getString("fkidcentro");
 
                 medico_veterinario = new Medico_Veterinario(matricolamv, nome, cognome, fkidcentro);
-             }
-        }catch (SQLException e) {
-                System.out.println("Qualcosa è andato storto!");
+            }
+        } catch (SQLException e) {
+            System.out.println("Qualcosa è andato storto!");
         }
         return medico_veterinario;
     }
@@ -50,10 +50,11 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
 
             cs.execute();
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto!");
         }
     }
+
     public void compileComponenti(String idTartaruga, Date dataCompilazione, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso) throws SQLException {
         try {
             Connection con = Database.getConnection();
@@ -73,10 +74,11 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
 
             cs.execute();
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
     public void updateCartellaClinica(String idCartellaClinica, String specie, int lunghezza, int larghezza, int peso, String luogo_ritrovamento, String matricola) throws SQLException {
         try {
             Connection con = Database.getConnection();
@@ -94,10 +96,11 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
 
             cs.execute();
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto!");
         }
     }
+
     public void updateComponenti(String idComponenti, Date dataCompilazione, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso) throws SQLException {
         try {
             Connection con = Database.getConnection();
@@ -117,7 +120,7 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
 
             cs.execute();
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }

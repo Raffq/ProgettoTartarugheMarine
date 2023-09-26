@@ -3,6 +3,7 @@ package ClassiPrincipali;
 import java.util.Date;
 
 public class Cartella_Clinica {
+    String idCartellaClinica;
     private String specie;
     private int lunghezza;
     private int larghezza;
@@ -10,8 +11,10 @@ public class Cartella_Clinica {
     private String luogoRitrovamento;
     private Date dataAmmissione;
     private Date dataRilascio;
+    String fkMatricolamv;
+    String fktarghetta;
 
-    public Cartella_Clinica(String specie, int lunghezza, int larghezza, int peso, String luogoRitrovamento, Date dataAmmissione, Date dataRilascio) {
+    public Cartella_Clinica(String iCartellaClinica, String specie, int lunghezza, int larghezza, int peso, String luogoRitrovamento, Date dataAmmissione, Date dataRilascio, String fkMatricolamv, String fktarghetta) {
         this.specie = specie;
         this.lunghezza = lunghezza;
         this.larghezza = larghezza;
@@ -20,6 +23,7 @@ public class Cartella_Clinica {
         this.dataAmmissione = dataAmmissione;
         this.dataRilascio = dataRilascio;
     }
+
     public String getSpecie() {
         return specie;
     }
@@ -31,6 +35,7 @@ public class Cartella_Clinica {
     public int getLunghezza() {
         return lunghezza;
     }
+
     public void setLunghezza(int lunghezza) {
         this.lunghezza = lunghezza;
     }

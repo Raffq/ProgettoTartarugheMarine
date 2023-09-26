@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.awt.Color;
 
 import ClassiPrincipali.*;
 import Controller.Controller;
@@ -18,18 +19,29 @@ import Gui.OperatoreGUI.OperatoreTemp;
 public class AccediTemp extends JFrame {
     private JTextField matricola;
     private JButton accedi;
+    private JLabel labelAccedi;
     private Personale ps;
 
     public AccediTemp() {
         super("Accedi");
 
         setLayout(new BorderLayout());
+        setSize(200, 120);
+        setResizable(false);
 
         matricola = new JTextField();
         accedi = new JButton("Accedi");
+        labelAccedi = new JLabel();
 
-        add(accedi, BorderLayout.PAGE_START);
+        labelAccedi.setText("Inserisci matricola");
+
+        matricola.setBackground(Color.lightGray);
+
+        add(labelAccedi, BorderLayout.PAGE_START);
         add(matricola, BorderLayout.CENTER);
+        add(accedi, BorderLayout.PAGE_END);
+
+
 
         Controller controller = new Controller();
 
@@ -39,23 +51,23 @@ public class AccediTemp extends JFrame {
                 String matricolatemp = matricola.getText();
                 try {
                     ps = controller.controllaMatricola(matricolatemp);
-                    controller.accedi(ps);
+                    if(ps != null) {
+                        controller.accedi(ps);
+                        dispose();
+                    }
+                    else {
+                        labelAccedi.setForeground(Color.RED);
+                        labelAccedi.setText("Matricola errata!");
+
+                    }
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
-                }
-                if (ps==null) {
-                    matricola.setText("Matricola Errata!");
-                }
-                else {
-                    dispose();
                 }
             }
         });
 
-        setSize(800, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 }
-

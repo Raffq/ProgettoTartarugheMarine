@@ -3,6 +3,7 @@ import Controller.Controller;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAO;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAOImpl;
 import Gui.AccediTemp;
+import Gui.MainWindow;
 import Gui.MedicoVeterinarioGUI.Medico_VeterinarioTemp;
 import Gui.OperatoreGUI.RiammettiTemp;
 
@@ -21,7 +22,7 @@ public class Main {
         /*Tecnico_LaboratorioDAOImpl test = new Tecnico_LaboratorioDAOImpl();
         test.countTartarugheCondizioneBeccoAnno("compromesso", 2023);*/
 
-        AccediTemp accedi = new AccediTemp();
+        MainWindow window = new MainWindow();
         //RiammettiTemp riammettiTemp=new RiammettiTemp();
 
         //prova
