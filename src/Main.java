@@ -1,5 +1,7 @@
 import ClassiPrincipali.Tartaruga;
 import Controller.Controller;
+import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAO;
+import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAOImpl;
 import Gui.AccediTemp;
 import Gui.MedicoVeterinarioGUI.Medico_VeterinarioTemp;
 import Gui.OperatoreGUI.RiammettiTemp;
@@ -16,6 +18,9 @@ public class Main {
             System.out.println(i.getTarghetta());
         }
 */
+        /*Tecnico_LaboratorioDAOImpl test = new Tecnico_LaboratorioDAOImpl();
+        test.countTartarugheCondizioneBeccoAnno("compromesso", 2023);*/
+
         AccediTemp accedi = new AccediTemp();
         //RiammettiTemp riammettiTemp=new RiammettiTemp();
 

@@ -1,5 +1,9 @@
 package Gui.MedicoVeterinarioGUI;
 
+import ClassiPrincipali.Personale;
+import ClassiPrincipali.Tartaruga;
+import Controller.Controller;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -8,11 +12,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import ClassiPrincipali.Personale;
-import ClassiPrincipali.Tartaruga;
-import Controller.Controller;
-
-public class CompilaCartellaClinicaTemp extends JFrame {
+public class ModificaCartellaClinica extends JFrame {
     private JTable listaTartarughe;
     private JTextField specie;
     private JTextField lunghezza;
@@ -20,8 +20,8 @@ public class CompilaCartellaClinicaTemp extends JFrame {
     private JTextField peso;
     private JTextField luogoRitrovamento;
     private JButton conferma;
-    public CompilaCartellaClinicaTemp(Personale personale) throws SQLException {
-        super("Compila cartella clinica tartaruga");
+    public ModificaCartellaClinica(Personale personale) throws SQLException {
+        super("Modifica cartella clinica tartaruga");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
@@ -32,6 +32,7 @@ public class CompilaCartellaClinicaTemp extends JFrame {
         DefaultTableModel model = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
+                //all cells false
                 return false;
             }
         };
@@ -60,11 +61,11 @@ public class CompilaCartellaClinicaTemp extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String tartarugaScelta = (String) listaTartarughe.getValueAt(listaTartarughe.getSelectedRow(), 0);
                 String specieScelta = specie.getText();
-                    String lunghezzaSceltaTemp = lunghezza.getText();
+                String lunghezzaSceltaTemp = lunghezza.getText();
                 int lunghezzaScelta = Integer.parseInt(lunghezzaSceltaTemp);
-                    String larghezzaSceltaTemp = larghezza.getText();
+                String larghezzaSceltaTemp = larghezza.getText();
                 int larghezzaScelta = Integer.parseInt(larghezzaSceltaTemp);
-                    String pesoSceltoTemp = peso.getText();
+                String pesoSceltoTemp = peso.getText();
                 int pesoScelto = Integer.parseInt(pesoSceltoTemp);
                 String luogoRitrovamentoScelto = luogoRitrovamento.getText();
 

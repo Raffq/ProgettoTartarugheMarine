@@ -1,22 +1,25 @@
 package ClassiPrincipali;
 
+import java.util.Date;
+
 public class Cartella_Clinica {
     private String specie;
     private int lunghezza;
     private int larghezza;
     private int peso;
-    String luogoRitrovamento;
+    private String luogoRitrovamento;
+    private Date dataAmmissione;
+    private Date dataRilascio;
 
-    /* DataCompilazione date */
-
-    public Cartella_Clinica(String specie, int lunghezza, int larghezza, int peso, String luogoRitrovamento) {
+    public Cartella_Clinica(String specie, int lunghezza, int larghezza, int peso, String luogoRitrovamento, Date dataAmmissione, Date dataRilascio) {
         this.specie = specie;
         this.lunghezza = lunghezza;
         this.larghezza = larghezza;
         this.peso = peso;
         this.luogoRitrovamento = luogoRitrovamento;
+        this.dataAmmissione = dataAmmissione;
+        this.dataRilascio = dataRilascio;
     }
-
     public String getSpecie() {
         return specie;
     }
@@ -28,7 +31,6 @@ public class Cartella_Clinica {
     public int getLunghezza() {
         return lunghezza;
     }
-
     public void setLunghezza(int lunghezza) {
         this.lunghezza = lunghezza;
     }
@@ -55,5 +57,21 @@ public class Cartella_Clinica {
 
     public void setLuogoRitrovamento(String luogoRitrovamento) {
         this.luogoRitrovamento = luogoRitrovamento;
+    }
+
+    public Date getDataAmmissione() {
+        return dataAmmissione;
+    }
+
+    public void setDataAmmissione(Date dataAmmissione) {
+        this.dataAmmissione = dataAmmissione;
+    }
+
+    public Date getDataRilascio() {
+        return dataRilascio;
+    }
+
+    public void setDataRilascio(Date dataRilascio) {
+        this.dataRilascio = dataRilascio;
     }
 }
