@@ -1,34 +1,24 @@
 package Gui.TecnicoLaboratorioGUI;
 
-import javax.swing.*;
-import java.awt.*;
+import Gui.RicercatoreGUI.VisualizzaStatisticheGUI;
 
-public class Tecnico_LaboratorioGUI extends JFrame {
-    private JButton aggiungiVasca;
-    private JButton conferma;
-    private JComboBox<Integer> NumeroVasche;
-    Integer[] MaxVasche = new Integer[20];
+import javax.swing.*;
+
+public class Tecnico_LaboratorioGUI extends JPanel {
+    private AggiungiVascheGUI aggiungiVaschePanel;
 
     public Tecnico_LaboratorioGUI() {
-        super("Tecnico laboratorio");
-        FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
-        setLayout(flowLayout);
+        aggiungiVaschePanel = new AggiungiVascheGUI();
+        add(aggiungiVaschePanel);
+        aggiungiVaschePanel.setVisible(false);
+    }
 
-        for(int i=0;i<20;i++)
-        {
-            MaxVasche[i]= i+1;
-        }
+    public void showAggiungiVasche()
+    {
+        aggiungiVaschePanel.setVisible(true);
+    }
 
-        aggiungiVasca = new JButton("Aggiungi Vasca");
-        conferma = new JButton("conferma");
-        NumeroVasche = new JComboBox<>(MaxVasche);
-
-        add(aggiungiVasca);
-        add(conferma);
-        add(NumeroVasche);
-
-        setSize(800, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+    public AggiungiVascheGUI getAggiungiVaschePanel() {
+        return aggiungiVaschePanel;
     }
 }

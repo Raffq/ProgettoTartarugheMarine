@@ -4,6 +4,7 @@ import ClassiPrincipali.Componenti;
 import ClassiPrincipali.Personale;
 import ClassiPrincipali.Tartaruga;
 import Controller.Controller;
+import Gui.MainWindow.DatePicker;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -18,37 +19,35 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
-public class ModificaComponentiGUI extends JFrame {
+public class ModificaComponentiGUI extends JPanel {
     private JLabel becco, collo, testa, coda, pinne, occhi, naso;
     private JComboBox condizioneBecco, condizioneCollo, condizioneTesta, condizioneCoda, condizionePinne, condizioneOcchi, condizioneNaso;
     private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
     private JButton conferma;
     private JTable listaComponenti;
-    public ModificaComponentiGUI(Personale personale) throws SQLException {
-        super("Modifica componenti tartaruga");
+    private DefaultTableModel tableModel;
+    private Controller controller;
+    private Personale personale;
+    public ModificaComponentiGUI() {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
-        Controller controller = new Controller();
+        controller = new Controller();
 
-        DefaultTableModel model = new DefaultTableModel(){
+        tableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        listaComponenti = new JTable(model);
-        Object[] columns = {"idcomponente", "targhetta tartaruga", "id cartella clinica"};
-        model.setColumnIdentifiers(columns);
+
+        listaComponenti = new JTable(tableModel);
+        tableModel.addColumn("IdComponenti");
+        tableModel.addColumn("Targhetta");
+        tableModel.addColumn("IdCartellaClinica");
 
         add(new JScrollPane(listaComponenti));
-
-        ArrayList<Componenti> componenti = controller.getComponenti();
-
-        for (Componenti i: componenti) {
-            model.addRow(new Object[] { i.getIdcomponenti(), i.getFktarghetta(), i.getFkIdCartellaClinica()});
-        }
 
         becco = new JLabel("becco");
         collo = new JLabel("collo");
@@ -67,37 +66,35 @@ public class ModificaComponentiGUI extends JFrame {
         condizioneOcchi = new JComboBox(condizioneString);
         condizioneNaso = new JComboBox(condizioneString);
 
-        UtilDateModel modelDate = new UtilDateModel();
-        java.util.Date today = new Date();
-        modelDate.setDate(today.getYear(), today.getMonth(), today.getDay());
-        modelDate.setSelected(true);
-        Properties p  = new Properties();
-        p.put("text.day", "Day");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
-
-        datePanel = new JDatePanelImpl(modelDate, p);
-        datePicker = new JDatePickerImpl(datePanel, null);
-        datePicker.setBounds(110, 100, 200, 25);
-        datePicker.setVisible(true);
+        datePicker = new DatePicker().Calendar();
         add(datePicker);
 
         conferma = new JButton("conferma");
 
-        add(becco);
-        add(condizioneBecco);
-        add(collo);
-        add(condizioneCollo);
-        add(testa);
-        add(condizioneTesta);
-        add(coda);
-        add(condizioneCoda);
-        add(pinne);
-        add(condizionePinne);
-        add(occhi);
-        add(condizioneOcchi);
-        add(naso);
-        add(condizioneNaso);
+
+        JPanel labelsPanel = new JPanel();
+        JPanel condizionePanel = new JPanel();
+
+        labelsPanel.add(becco);
+        condizionePanel.add(condizioneBecco);
+        labelsPanel.add(collo);
+        condizionePanel.add(condizioneCollo);
+        labelsPanel.add(testa);
+        condizionePanel.add(condizioneTesta);
+        labelsPanel.add(coda);
+        condizionePanel.add(condizioneCoda);
+        labelsPanel.add(pinne);
+        condizionePanel.add(condizionePinne);
+        labelsPanel.add(occhi);
+        condizionePanel.add(condizioneOcchi);
+        labelsPanel.add(naso);
+        condizionePanel.add(condizioneNaso);
+
+        JPanel fixPanel = new JPanel();
+        fixPanel.add(labelsPanel, BorderLayout.PAGE_START);
+        fixPanel.add(condizionePanel, BorderLayout.PAGE_END);
+
+        add(fixPanel);
         add(conferma);
 
         conferma.addActionListener(new ActionListener() {
@@ -121,9 +118,23 @@ public class ModificaComponentiGUI extends JFrame {
                 }
             }
         });
-
-        setSize(800, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
     }
+
+    public void populateListaTartarughe()
+    {
+        try {
+            ArrayList<Componenti> componenti = controller.getComponenti();
+
+            for (Componenti i: componenti) {
+                tableModel.addRow(new Object[] { i.getIdcomponenti() , i.getFktarghetta(), i.getFkIdCartellaClinica()});
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void setPersonale(Personale personale) {
+        this.personale = personale;
+    }
+
 }

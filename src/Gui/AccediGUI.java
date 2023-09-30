@@ -9,14 +9,15 @@ import static java.awt.Color.black;
 public class AccediGUI extends JPanel {
 
     private JButton buttonLogin;
+
     private JTextField loginMatricola;
 
     private JLabel accediLabel;
 
-    public AccediGUI(JButton buttonLogin, JTextField loginMatricola, JLabel accediLabel) {
-        this.buttonLogin = buttonLogin;
-        this.loginMatricola = loginMatricola;
-        this.accediLabel = accediLabel;
+    public AccediGUI() {
+        buttonLogin = new JButton("Accedi");;
+        loginMatricola = new JTextField();
+        accediLabel = new JLabel("Inserisci matricola");
 
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(200, 120));
@@ -29,4 +30,17 @@ public class AccediGUI extends JPanel {
         add(loginMatricola, BorderLayout.CENTER);
         add(buttonLogin, BorderLayout.PAGE_END);
     }
+
+    public JButton getButtonLogin() {
+        return buttonLogin;
+    }
+
+    public JTextField getLoginMatricola() {
+        return loginMatricola;
+    }
+
+    public JLabel getAccediLabel() {
+        return accediLabel;
+    }
 }
+

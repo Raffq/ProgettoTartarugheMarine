@@ -31,7 +31,6 @@ public class RiammettiGUI extends JPanel {
         setLayout(flowLayout);
 
         controller = new Controller();
-
         tableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {

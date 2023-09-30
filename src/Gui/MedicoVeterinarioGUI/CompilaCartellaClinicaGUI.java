@@ -12,7 +12,7 @@ import ClassiPrincipali.Personale;
 import ClassiPrincipali.Tartaruga;
 import Controller.Controller;
 
-public class CompilaCartellaClinicaGUI extends JFrame {
+public class CompilaCartellaClinicaGUI extends JPanel {
     private JTable listaTartarughe;
     private JTextField specie;
     private JTextField lunghezza;
@@ -20,31 +20,27 @@ public class CompilaCartellaClinicaGUI extends JFrame {
     private JTextField peso;
     private JTextField luogoRitrovamento;
     private JButton conferma;
-    public CompilaCartellaClinicaGUI(Personale personale) throws SQLException {
-        super("Compila cartella clinica tartaruga");
+    private Controller controller;
+    private Personale personale;
+    private DefaultTableModel tableModel;
+
+    public CompilaCartellaClinicaGUI() {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
-        Controller controller = new Controller();
+        controller = new Controller();
 
-        listaTartarughe = new JTable();
-        Object[] columns = {"Targhetta", "Nome"};
-        DefaultTableModel model = new DefaultTableModel(){
+        tableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
 
-        model.setColumnIdentifiers(columns);
-        ArrayList<Tartaruga> data = new ArrayList<>();
-        data = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
+        listaTartarughe = new JTable(tableModel);
+        tableModel.addColumn("Targhetta");
+        tableModel.addColumn("Nome");
 
-        for(Tartaruga i : data){
-            model.addRow(new Object[]{i.getTarghetta(), i.getNomeTartaruga()});
-        }
-
-        listaTartarughe.setModel(model);
 
         JScrollPane scrollPane = new JScrollPane(listaTartarughe);
 
@@ -60,11 +56,11 @@ public class CompilaCartellaClinicaGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String tartarugaScelta = (String) listaTartarughe.getValueAt(listaTartarughe.getSelectedRow(), 0);
                 String specieScelta = specie.getText();
-                    String lunghezzaSceltaTemp = lunghezza.getText();
+                String lunghezzaSceltaTemp = lunghezza.getText();
                 int lunghezzaScelta = Integer.parseInt(lunghezzaSceltaTemp);
-                    String larghezzaSceltaTemp = larghezza.getText();
+                String larghezzaSceltaTemp = larghezza.getText();
                 int larghezzaScelta = Integer.parseInt(larghezzaSceltaTemp);
-                    String pesoSceltoTemp = peso.getText();
+                String pesoSceltoTemp = peso.getText();
                 int pesoScelto = Integer.parseInt(pesoSceltoTemp);
                 String luogoRitrovamentoScelto = luogoRitrovamento.getText();
 
@@ -84,9 +80,25 @@ public class CompilaCartellaClinicaGUI extends JFrame {
         add(luogoRitrovamento);
         add(conferma);
 
-        setSize(800, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+    }
 
+    public void populateListaTartarughe()
+    {
+        try {
+            ArrayList<Tartaruga> data = new ArrayList<>();
+
+                data = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
+
+            for(Tartaruga i : data){
+                this.tableModel.addRow(new Object[]{i.getTarghetta(), i.getNomeTartaruga()});
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void setPersonale(Personale personale) {
+        this.personale = personale;
     }
 }
+

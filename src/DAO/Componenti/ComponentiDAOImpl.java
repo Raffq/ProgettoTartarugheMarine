@@ -68,8 +68,6 @@ public class ComponentiDAOImpl implements ComponentiDAO {
                 String fkTarghetta = resultSet.getString("fktarghetta");
                 String fkIdCartellaClinica = resultSet.getString("fkidcartellaclinica");
 
-                System.out.println(condizioneBecco);
-
                 Componenti componente = new Componenti(idcomponenti, condizioneBecco, condizioneCollo, condizioneTesta, condizioneCoda, condizionePinne, condizioneOcchi, condizioneNaso, dataCompilazione, fkTarghetta, fkIdCartellaClinica);
                 componenti.add(componente);
             }

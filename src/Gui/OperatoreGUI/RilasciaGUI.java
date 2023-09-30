@@ -19,7 +19,6 @@ import java.util.Date;
 public class RilasciaGUI extends JPanel {
     private JTable listaTartarughe;
     private JButton conferma;
-    private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
 
     private Personale personale;

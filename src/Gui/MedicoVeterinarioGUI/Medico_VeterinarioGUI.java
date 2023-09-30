@@ -1,90 +1,84 @@
 package Gui.MedicoVeterinarioGUI;
 
+import Gui.OperatoreGUI.AmmettiGUI;
+
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
-import ClassiPrincipali.Personale;
-import Controller.Controller;
+public class Medico_VeterinarioGUI extends JPanel {
+    private CompilaComponentiGUI compilaComponentiPanel;
+    private CompilaCartellaClinicaGUI compilaCartellaClinicaPanel;
 
-public class Medico_VeterinarioGUI extends JFrame {
-    private JButton compilaComponente;
-    private JButton compilaCartellaClinica;
-    private JButton modificaComponente;
-    private JButton modificaCartellaClinica;
-    public Medico_VeterinarioGUI(Personale personale){
-        super("Medico veterinario");
-        FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
-        setLayout(flowLayout);
+    private ModificaComponentiGUI modificaComponentiPanel;
+    private ModificaCartellaClinicaGUI modificaCartellaClinicaPanel;
 
-        compilaComponente = new JButton("Compila componenti");
-        compilaCartellaClinica = new JButton("Compila cartella clinica");
-        modificaComponente = new JButton("Modifica componenti");
-        modificaCartellaClinica = new JButton("Modifica cartella clinica");
+    public Medico_VeterinarioGUI() {
+        compilaComponentiPanel = new CompilaComponentiGUI();
+        add(compilaComponentiPanel);
+        compilaComponentiPanel.setVisible(false);
 
-        Controller controller = new Controller();
+        compilaCartellaClinicaPanel = new CompilaCartellaClinicaGUI();
+        add(compilaCartellaClinicaPanel);
+        compilaCartellaClinicaPanel.setVisible(false);
 
-        compilaCartellaClinica.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                // Chiamare i metodi del controller quando il pulsante viene premuto
-                try {
-                    controller.goToCompilaCartellaClinica(personale);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
+        modificaComponentiPanel = new ModificaComponentiGUI();
+        add(modificaComponentiPanel);
+        modificaComponentiPanel.setVisible(false);
 
-        compilaComponente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                // Chiamare i metodi del controller quando il pulsante viene premuto
-                try {
-                    controller.goToCompilaComponenti(personale);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
+        modificaCartellaClinicaPanel = new ModificaCartellaClinicaGUI();
+        add(modificaCartellaClinicaPanel);
+        modificaCartellaClinicaPanel.setVisible(false);
 
-        modificaComponente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                // Chiamare i metodi del controller quando il pulsante viene premuto
-                try {
-                    controller.goToModificaComponenti(personale);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
+    }
 
-        modificaCartellaClinica.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                // Chiamare i metodi del controller quando il pulsante viene premuto
-                try {
-                    controller.goToModificaCartellaClinica(personale);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
+    public void showCompilaComponenti()
+    {
+        compilaCartellaClinicaPanel.setVisible(false);
+        modificaComponentiPanel.setVisible(false);
+        modificaCartellaClinicaPanel.setVisible(false);
 
-        add(compilaComponente);
-        add(compilaCartellaClinica);
-        add(modificaComponente);
-        add(modificaCartellaClinica);
+        compilaComponentiPanel.setVisible(true);
+    }
+    public CompilaComponentiGUI getCompilaComponentiPanel() {
+        return compilaComponentiPanel;
+    }
 
-        setSize(800, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+    public void showCompilaCartellaClinica()
+    {
+        compilaComponentiPanel.setVisible(false);
+        modificaComponentiPanel.setVisible(false);
+        modificaCartellaClinicaPanel.setVisible(false);
+
+        compilaCartellaClinicaPanel.setVisible(true);
+    }
+
+    public CompilaCartellaClinicaGUI getCompilaCartellaClinicaPanel() {
+        return compilaCartellaClinicaPanel;
+    }
+
+    public void showModificaComponenti()
+    {
+        compilaComponentiPanel.setVisible(false);
+        compilaCartellaClinicaPanel.setVisible(false);
+        modificaCartellaClinicaPanel.setVisible(false);
+
+        modificaComponentiPanel.setVisible(true);
+    }
+
+
+    public ModificaComponentiGUI getModificaComponentiPanel() {
+        return modificaComponentiPanel;
+    }
+
+    public void showModificaCartellaClinica()
+    {
+        compilaComponentiPanel.setVisible(false);
+        compilaCartellaClinicaPanel.setVisible(false);
+        modificaComponentiPanel.setVisible(false);
+
+        modificaCartellaClinicaPanel.setVisible(true);
+    }
+
+    public ModificaCartellaClinicaGUI getModificaCartellaClinicaPanel() {
+        return modificaCartellaClinicaPanel;
     }
 }

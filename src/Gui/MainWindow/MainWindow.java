@@ -3,12 +3,13 @@ package Gui.MainWindow;
 import ClassiPrincipali.*;
 import Controller.Controller;
 import Gui.AccediGUI;
-import Gui.OperatoreGUI.AmmettiGUI;
-import Gui.OperatoreGUI.RiammettiGUI;
-import Gui.OperatoreGUI.RilasciaGUI;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+import Gui.MedicoVeterinarioGUI.MedicoVeterinarioButtonsGUI;
+import Gui.MedicoVeterinarioGUI.Medico_VeterinarioGUI;
+import Gui.OperatoreGUI.*;
+import Gui.RicercatoreGUI.RicercatoreButtonsGUI;
+import Gui.RicercatoreGUI.RicercatoreGUI;
+import Gui.TecnicoLaboratorioGUI.Tecnico_LaboratorioButtonsGUI;
+import Gui.TecnicoLaboratorioGUI.Tecnico_LaboratorioGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,14 +17,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Properties;
 
 public class MainWindow extends JFrame {
 
     public Controller controller;
-    public Personale ps;
+    public Personale membroPersonale;
     public MainWindow(Controller c) throws SQLException {
         super("Tartarughe");
         this.controller = c;
@@ -38,237 +36,182 @@ public class MainWindow extends JFrame {
         mainPanel.setBorder(null);
         mainPanel.setLayout(new BorderLayout(0, 0));
 
-        setVisible(true);
+        // TOP PANEL
+        JPanel topPanel = new JPanel();
+        OperatoreButtonsGUI operatoreButtons = new OperatoreButtonsGUI();
+        operatoreButtons.setVisible(false);
+        topPanel.add(operatoreButtons);
+        MedicoVeterinarioButtonsGUI medicoVeterinarioButtons = new MedicoVeterinarioButtonsGUI();
+        medicoVeterinarioButtons.setVisible(false);
+        topPanel.add(medicoVeterinarioButtons);
+        RicercatoreButtonsGUI ricercatoreButtons = new RicercatoreButtonsGUI();
+        ricercatoreButtons.setVisible(false);
+        topPanel.add(ricercatoreButtons);
+        Tecnico_LaboratorioButtonsGUI tecnicoLaboratorioButtons = new Tecnico_LaboratorioButtonsGUI();
+        tecnicoLaboratorioButtons.setVisible(false);
+        topPanel.add(tecnicoLaboratorioButtons);
 
         // MIDDLE PANEL
         JPanel middlePanel = new JPanel();
-
-        AmmettiGUI ammettiPanel = new AmmettiGUI();
-        middlePanel.add(ammettiPanel);
-        ammettiPanel.setVisible(false);
-
-        RiammettiGUI riammettiPanel = new RiammettiGUI();
-        mainPanel.add(riammettiPanel);
-        riammettiPanel.setVisible(false);
-
-        RilasciaGUI rilasciaPanel = new RilasciaGUI();
-        rilasciaPanel.add(riammettiPanel);
-        rilasciaPanel.setVisible(false);
-
-        // TOP PANEL
-        JPanel topPanel = new JPanel();
-        // OPERATORE
-
-        JButton ammettiButton = new JButton("Ametti");
-        JButton riammettiButton = new JButton("Riammetti");
-        JButton rilasciaButton = new JButton("Rilascia");
-
-        topPanel.add(ammettiButton);
-        topPanel.add(riammettiButton);
-        topPanel.add(rilasciaButton);
-
-        ammettiButton.setVisible(false);
-        riammettiButton.setVisible(false);
-        rilasciaButton.setVisible(false);
-
-        // MEDICO VETERINARIO
-
-        JButton compilaComponente = new JButton("Compila componenti");
-        JButton compilaCartellaClinica = new JButton("Compila cartella clinica");
-        JButton modificaComponente = new JButton("Modifica componenti");
-        JButton modificaCartellaClinica = new JButton("Modifica cartella clinica");
-
-        topPanel.add(compilaComponente);
-        topPanel.add(compilaCartellaClinica);
-        topPanel.add(modificaComponente);
-        topPanel.add(modificaCartellaClinica);
-
-        compilaComponente.setVisible(false);
-        compilaCartellaClinica.setVisible(false);
-        modificaComponente.setVisible(false);
-        modificaCartellaClinica.setVisible(false);
-
-        // RICERCATORE
-
-        JButton visualizzaStatistiche = new JButton("Visualizza statistiche");
-
-        topPanel.add(visualizzaStatistiche);
-
-        visualizzaStatistiche.setVisible(false);
-
-        // TECNICO_LABORATORIO
-
-        JButton aggiungiVasca = new JButton("Aggiungi Vasca");
-
-        topPanel.add(aggiungiVasca);
-
-        aggiungiVasca.setVisible(false);
+        OperatoreGUI operatoriPanels = new OperatoreGUI();
+        middlePanel.add(operatoriPanels);
+        operatoriPanels.setVisible(false);
+        Medico_VeterinarioGUI medicoVeterinarioPanels = new Medico_VeterinarioGUI();
+        middlePanel.add(medicoVeterinarioPanels);
+        medicoVeterinarioPanels.setVisible(false);
+        RicercatoreGUI ricercatoriPanels = new RicercatoreGUI();
+        middlePanel.add(ricercatoriPanels);
+        ricercatoriPanels.setVisible(false);
+        Tecnico_LaboratorioGUI tecnicoLaboratorioPanels = new Tecnico_LaboratorioGUI();
+        middlePanel.add(tecnicoLaboratorioPanels);
+        tecnicoLaboratorioPanels.setVisible(false);
 
         // RIGHT PANEL
-        JButton loginButton = new JButton("Accedi");
-        JTextField loginMatricola = new JTextField();
-        JLabel accediLabel = new JLabel("Inserisci matricola");
-
-        AccediGUI rightPanel = new AccediGUI(loginButton, loginMatricola, accediLabel);
-
-        loginButton.addActionListener(e -> {
-
-
+        AccediGUI rightPanel = new AccediGUI();
+        rightPanel.getButtonLogin().addActionListener(e -> {
             try {
-                String loginMatricolaString = loginMatricola.getText();
-                ps = controller.controllaMatricola(loginMatricolaString);
+                String loginMatricolaString = rightPanel.getLoginMatricola().getText();
+                membroPersonale = controller.controllaMatricola(loginMatricolaString);
 
-                if(ps != null) {
+                if(membroPersonale != null) {
 
-                    if(ps instanceof Operatore) {
-                        ammettiButton.setVisible(true);
-                        riammettiButton.setVisible(true);
-                        rilasciaButton.setVisible(true);
+                    if(membroPersonale instanceof Operatore) {
+                        medicoVeterinarioButtons.setVisible(false);
+                        ricercatoreButtons.setVisible(false);
+                        tecnicoLaboratorioButtons.setVisible(false);
 
-                        compilaComponente.setVisible(false);
-                        compilaCartellaClinica.setVisible(false);
-                        modificaComponente.setVisible(false);
-                        modificaCartellaClinica.setVisible(false);
-                        visualizzaStatistiche.setVisible(false);
-                        aggiungiVasca.setVisible(false);
+                        medicoVeterinarioPanels.setVisible(false);
+                        ricercatoriPanels.setVisible(false);
+                        tecnicoLaboratorioPanels.setVisible(false);
 
-                        ammettiButton.addActionListener(new ActionListener() {
+                        operatoreButtons.setVisible(true);
+                        operatoriPanels.setVisible(true);
+
+                        operatoreButtons.getAmmettiButton().addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                riammettiPanel.setVisible(false);
-                                rilasciaPanel.setVisible(false);
-
-                                ammettiPanel.setVisible(true);
-                                ammettiPanel.SetPersonale(ps);
-
-
+                                operatoriPanels.showAmmetti();
+                                operatoriPanels.getAmmettiPanel().SetPersonale(membroPersonale);
                             }
                         });
 
-                        riammettiButton.addActionListener(new ActionListener() {
+                        operatoreButtons.getRiammettiButton().addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                ammettiPanel.setVisible(false);
-                                rilasciaPanel.setVisible(false);
-
-                                riammettiPanel.setVisible(true);
-
-                                riammettiPanel.SetPersonale(ps);
-                                riammettiPanel.populateListaTartarughe();
+                                operatoriPanels.showRiAmmetti();
+                                operatoriPanels.getRiammettiPanel().SetPersonale(membroPersonale);
+                                operatoriPanels.getRiammettiPanel().populateListaTartarughe();
                             }
                         });
 
-                        rilasciaButton.addActionListener(new ActionListener() {
+                        operatoreButtons.getRilasciaButton().addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                ammettiPanel.setVisible(false);
-                                riammettiPanel.setVisible(false);
-
-                                rilasciaPanel.setVisible(true);
-
-                                rilasciaPanel.SetPersonale(ps);
-                                rilasciaPanel.populateListaTartarughe();
+                                operatoriPanels.showRilascia();
+                                operatoriPanels.getRilasciaPanel().SetPersonale(membroPersonale);
+                                operatoriPanels.getRilasciaPanel().populateListaTartarughe();
                             }
                         });
                     }
-                    if(ps instanceof Medico_Veterinario) {
-                        compilaComponente.setVisible(true);
-                        compilaCartellaClinica.setVisible(true);
-                        modificaComponente.setVisible(true);
-                        modificaCartellaClinica.setVisible(true);
+                    else if(membroPersonale instanceof Medico_Veterinario) {
+                        operatoreButtons.setVisible(false);
+                        ricercatoreButtons.setVisible(false);
+                        tecnicoLaboratorioButtons.setVisible(false);
 
-                        ammettiButton.setVisible(false);
-                        riammettiButton.setVisible(false);
-                        rilasciaButton.setVisible(false);
-                        visualizzaStatistiche.setVisible(false);
-                        aggiungiVasca.setVisible(false);
+                        operatoriPanels.setVisible(false);
+                        ricercatoriPanels.setVisible(false);
+                        tecnicoLaboratorioPanels.setVisible(false);
 
-                        compilaComponente.addActionListener(new ActionListener() {
+                        medicoVeterinarioButtons.setVisible(true);
+                        medicoVeterinarioPanels.setVisible(true);
+
+                        medicoVeterinarioButtons.getCompilaComponente().addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                //compilaComponentiPanel.setPersonale(ps);
-
-                                //compilaCartellaClinicaPanel.setVisible(false);
-                                //compilaComponentiPanel.setVisible(true);
-                                //modificaCartellaClinicaPanel.setVisible(false);
-                                //modificaComponentiPanel.setVisible(false);
+                                medicoVeterinarioPanels.showCompilaComponenti();
+                                medicoVeterinarioPanels.getCompilaComponentiPanel().setPersonale(membroPersonale);
+                                medicoVeterinarioPanels.getCompilaComponentiPanel().populateListaTartarughe();
                             }
                         });
-                        compilaCartellaClinica.addActionListener(new ActionListener() {
+                        medicoVeterinarioButtons.getCompilaCartellaClinica().addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                //compilaCartellaClinicaPanel.setPersonale(ps);
-
-                                //compilaCartellaClinicaPanel.setVisible(true);
-                                //compilaComponentiPanel.setVisible(false);
-                                //modificaCartellaClinicaPanel.setVisible(false);
-                                //modificaComponentiPanel.setVisible(false);
+                                medicoVeterinarioPanels.showCompilaCartellaClinica();
+                                medicoVeterinarioPanels.getCompilaCartellaClinicaPanel().setPersonale(membroPersonale);
+                                medicoVeterinarioPanels.getCompilaCartellaClinicaPanel().populateListaTartarughe();
                             }
                         });
-                        modificaComponente.addActionListener(new ActionListener() {
+                        medicoVeterinarioButtons.getModificaComponente().addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                //compilaCartellaClinicaPanel.setVisible(false);
-                                //compilaComponentiPanel.setVisible(false);
-                                //modificaCartellaClinicaPanel.setVisible(false);
-                                //modificaComponentiPanel.setVisible(true);
+                                medicoVeterinarioPanels.showModificaComponenti();
+                                medicoVeterinarioPanels.getModificaComponentiPanel().setPersonale(membroPersonale);
+                                medicoVeterinarioPanels.getModificaComponentiPanel().populateListaTartarughe();
                             }
                         });
-                        modificaCartellaClinica.addActionListener(new ActionListener() {
+                        medicoVeterinarioButtons.getModificaCartellaClinica().addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                //compilaCartellaClinicaPanel.setVisible(false);
-                                //compilaComponentiPanel.setVisible(false);
-                                //modificaCartellaClinicaPanel.setVisible(true);
-                                //modificaComponentiPanel.setVisible(false);
-                            }
-                        });
-
-
-                    }
-                    if(ps instanceof Ricercatore) {
-                        visualizzaStatistiche.setVisible(true);
-
-                        compilaComponente.setVisible(false);
-                        compilaCartellaClinica.setVisible(false);
-                        modificaComponente.setVisible(false);
-                        modificaCartellaClinica.setVisible(false);
-                        ammettiButton.setVisible(false);
-                        riammettiButton.setVisible(false);
-                        rilasciaButton.setVisible(false);
-                        aggiungiVasca.setVisible(false);
-
-                        visualizzaStatistiche.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                controller.goToStatistiche();
+                                medicoVeterinarioPanels.showModificaCartellaClinica();
+                                medicoVeterinarioPanels.getModificaCartellaClinicaPanel().setPersonale(membroPersonale);
+                                medicoVeterinarioPanels.getModificaCartellaClinicaPanel().populateListaTartarughe();
                             }
                         });
                     }
-                    if(ps instanceof Tecnico_Laboratorio) {
-                        aggiungiVasca.setVisible(true);
+                    else if(membroPersonale instanceof Ricercatore) {
+                        operatoreButtons.setVisible(false);
+                        medicoVeterinarioButtons.setVisible(false);
+                        tecnicoLaboratorioButtons.setVisible(false);
 
-                        visualizzaStatistiche.setVisible(false);
-                        compilaComponente.setVisible(false);
-                        compilaCartellaClinica.setVisible(false);
-                        modificaComponente.setVisible(false);
-                        modificaCartellaClinica.setVisible(false);
-                        ammettiButton.setVisible(false);
-                        riammettiButton.setVisible(false);
-                        rilasciaButton.setVisible(false);
+                        operatoriPanels.setVisible(false);
+                        medicoVeterinarioPanels.setVisible(false);
+                        tecnicoLaboratorioPanels.setVisible(false);
 
-                        aggiungiVasca.addActionListener(new ActionListener() {
+                        ricercatoreButtons.setVisible(true);
+                        ricercatoriPanels.setVisible(true);
+
+                        ricercatoreButtons.getVisualizzaStatistiche().addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
+                                ricercatoriPanels.showvisualizzaStatistiche();
+                                // TO DO
+                            }
+                        });
+                    }
+                    else if(membroPersonale instanceof Tecnico_Laboratorio) {
+                        operatoreButtons.setVisible(false);
+                        medicoVeterinarioButtons.setVisible(false);
+                        ricercatoreButtons.setVisible(false);
 
+                        operatoriPanels.setVisible(false);
+                        medicoVeterinarioPanels.setVisible(false);
+                        ricercatoriPanels.setVisible(false);
 
+                        tecnicoLaboratorioButtons.setVisible(true);
+                        tecnicoLaboratorioPanels.setVisible(true);
+
+                        tecnicoLaboratorioButtons.getAggiungiVasca().addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                tecnicoLaboratorioPanels.showAggiungiVasche();
+                                // TO DO
                             }
                         });
                     }
                 }
                 else {
-                    accediLabel.setForeground(Color.RED);
-                    accediLabel.setText("Matricola errata!");
+                    rightPanel.getAccediLabel().setForeground(Color.RED);
+                    rightPanel.getAccediLabel().setText("Matricola errata!");
+
+                    operatoriPanels.setVisible(false);
+                    medicoVeterinarioPanels.setVisible(false);
+                    ricercatoriPanels.setVisible(false);
+                    tecnicoLaboratorioPanels.setVisible(true);
+
+                    operatoreButtons.setVisible(false);
+                    medicoVeterinarioButtons.setVisible(false);
+                    ricercatoreButtons.setVisible(false);
+                    tecnicoLaboratorioButtons.setVisible(false);
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -276,15 +219,17 @@ public class MainWindow extends JFrame {
         });
 
         topPanel.setPreferredSize(new Dimension(1400, 100));
-        rightPanel.setPreferredSize(new Dimension(300, 600));
-        //middlePanel.setPreferredSize(new Dimension(1200, 700));
+        rightPanel.setPreferredSize(new Dimension(300, 700));
+        middlePanel.setPreferredSize(new Dimension(1100, 700));
 
         topPanel.setBackground(Color.lightGray);
-        rightPanel.setBackground(Color.CYAN);
 
         add(topPanel, BorderLayout.PAGE_START);
         add(middlePanel, BorderLayout.CENTER);
         add(rightPanel, BorderLayout.LINE_END);
+
+        setVisible(true);
     }
 }
+
 

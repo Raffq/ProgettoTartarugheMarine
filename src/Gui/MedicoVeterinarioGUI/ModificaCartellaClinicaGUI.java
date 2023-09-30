@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ModificaCartellaClinicaGUI extends JFrame {
+public class ModificaCartellaClinicaGUI extends JPanel {
     private JTable listaCartelleCliniche;
     private JTextField specie;
     private JTextField lunghezza;
@@ -21,16 +21,16 @@ public class ModificaCartellaClinicaGUI extends JFrame {
     private JTextField peso;
     private JTextField luogoRitrovamento;
     private JButton conferma;
-    public ModificaCartellaClinicaGUI(Personale personale) throws SQLException {
-        super("Modifica cartella clinica tartaruga");
+    private Personale personale;
+    private DefaultTableModel model;
+    private Controller controller;
+    public ModificaCartellaClinicaGUI() {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
-        Controller controller = new Controller();
+        controller = new Controller();
 
-        listaCartelleCliniche = new JTable();
-        Object[] columns = {"idcartellecliniche", "matricola"};
-        DefaultTableModel model = new DefaultTableModel(){
+        model = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
                 //all cells false
@@ -38,15 +38,9 @@ public class ModificaCartellaClinicaGUI extends JFrame {
             }
         };
 
-        model.setColumnIdentifiers(columns);
-        ArrayList<Cartella_Clinica> data = new ArrayList<>();
-        data = controller.getCartelleCliniche();
-
-        for(Cartella_Clinica i : data){
-            model.addRow(new Object[]{i.getIdCartellaClinica(), i.getFkMatricolamv()});
-        }
-
-        listaCartelleCliniche.setModel(model);
+        listaCartelleCliniche = new JTable(model);
+        model.addColumn("IdCartellaClinica");
+        model.addColumn("Targhetta");
 
         JScrollPane scrollPane = new JScrollPane(listaCartelleCliniche);
 
@@ -60,7 +54,7 @@ public class ModificaCartellaClinicaGUI extends JFrame {
         conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String cartellaClinicaScelta = (String) listaCartelleCliniche.getValueAt(listaCartelleCliniche.getSelectedRow(), 0);
+                String tartarugaScelta = (String) listaCartelleCliniche.getValueAt(listaCartelleCliniche.getSelectedRow(), 0);
                 String specieScelta = specie.getText();
                 String lunghezzaSceltaTemp = lunghezza.getText();
                 int lunghezzaScelta = Integer.parseInt(lunghezzaSceltaTemp);
@@ -71,7 +65,7 @@ public class ModificaCartellaClinicaGUI extends JFrame {
                 String luogoRitrovamentoScelto = luogoRitrovamento.getText();
 
                 try {
-                    controller.updateCartellaClinica(cartellaClinicaScelta, specieScelta,lunghezzaScelta, larghezzaScelta, pesoScelto, luogoRitrovamentoScelto, personale.getMatricola());
+                    controller.updateCartellaClinica(tartarugaScelta, specieScelta,lunghezzaScelta, larghezzaScelta, pesoScelto, luogoRitrovamentoScelto, personale.getMatricola());
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -86,9 +80,23 @@ public class ModificaCartellaClinicaGUI extends JFrame {
         add(luogoRitrovamento);
         add(conferma);
 
-        setSize(800, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
     }
+
+    public void populateListaTartarughe()
+    {
+        try {
+            ArrayList<Cartella_Clinica> data = new ArrayList<>();
+            data = controller.getCartelleCliniche();
+
+            for(Cartella_Clinica i : data){
+                model.addRow(new Object[]{i.getIdCartellaClinica(), i.getFktarghetta()});
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void setPersonale(Personale personale) {
+        this.personale = personale;
+    }
+
 }

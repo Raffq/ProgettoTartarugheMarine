@@ -1,16 +1,14 @@
 package Gui.RicercatoreGUI;
 
-import javax.naming.ldap.Control;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import Controller.Controller;
 
-public class VisualizzaStatisticheGUI extends JFrame {
+public class VisualizzaStatisticheGUI extends JPanel {
     private JLabel statBecco, statCollo, statTesta, statCoda, statPinne, statOcchi, statNaso;
     private JLabel textBecco, textCollo, textTesta, textCoda, textPinne, textOcchi, textNaso;
 
@@ -19,10 +17,7 @@ public class VisualizzaStatisticheGUI extends JFrame {
     Integer meseScelto, annoScelto;
     String condizioneScelta;
     private JButton mese, anno;
-
-
     public VisualizzaStatisticheGUI() {
-        super("Visualizzazione statistiche");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
@@ -143,7 +138,6 @@ public class VisualizzaStatisticheGUI extends JFrame {
         });
 
         setSize(800, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
 }

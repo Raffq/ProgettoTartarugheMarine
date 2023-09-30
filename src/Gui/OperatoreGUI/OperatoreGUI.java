@@ -1,73 +1,56 @@
-/*package Gui.OperatoreGUI;
+package Gui.OperatoreGUI;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.SQLException;
-import java.text.ParseException;
 
-import ClassiPrincipali.Personale;
-import Controller.Controller;
+public class OperatoreGUI extends JPanel {
+    private AmmettiGUI ammettiPanel;
+    private RiammettiGUI riammettiPanel;
+    private RilasciaGUI rilasciaPanel;
 
-public class OperatoreGUI extends JFrame {
-    private JButton ammetti;
-    private JButton riammetti;
-    private JButton rilascia;
+    public OperatoreGUI() {
+        ammettiPanel = new AmmettiGUI();
+        add(ammettiPanel);
+        ammettiPanel.setVisible(false);
 
-    public OperatoreGUI(Personale personale) {
-        FlowLayout flowLayout=new FlowLayout(FlowLayout.CENTER, 20, 0);
-        setLayout(flowLayout);
+        riammettiPanel = new RiammettiGUI();
+        add(riammettiPanel);
+        riammettiPanel.setVisible(false);
 
-        ammetti=new JButton("Ammetti");
-        riammetti=new JButton("Riammetti");
-        rilascia=new JButton("Rilascia");
-
-        Controller controller = new Controller();
-
-        ammetti.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                // Chiamare i metodi del controller quando il pulsante viene premuto
-                    controller.goToAmmetti(personale);
-            }
-        });
-
-        riammetti.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                // Chiamare i metodi del controller quando il pulsante viene premuto
-                try {
-                    controller.goToRiammetti(personale);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-        rilascia.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                // Chiamare i metodi del controller quando il pulsante viene premuto
-                try {
-                    controller.goToRilascia(personale);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-        add(ammetti);
-        add(riammetti);
-        add(rilascia);
-
-        setSize(800, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        rilasciaPanel = new RilasciaGUI();
+        add(rilasciaPanel);
+        rilasciaPanel.setVisible(false);
     }
 
+    public void showAmmetti() {
+        riammettiPanel.setVisible(false);
+        rilasciaPanel.setVisible(false);
+
+        ammettiPanel.setVisible(true);
+    }
+
+    public AmmettiGUI getAmmettiPanel() {
+        return ammettiPanel;
+    }
+
+    public void showRiAmmetti() {
+        ammettiPanel.setVisible(false);
+        rilasciaPanel.setVisible(false);
+
+        riammettiPanel.setVisible(true);
+    }
+
+    public RiammettiGUI getRiammettiPanel() {
+        return riammettiPanel;
+    }
+
+    public void showRilascia() {
+        ammettiPanel.setVisible(false);
+        riammettiPanel.setVisible(false);
+
+        rilasciaPanel.setVisible(true);
+    }
+
+    public RilasciaGUI getRilasciaPanel() {
+        return rilasciaPanel;
+    }
 }
-*/

@@ -3,6 +3,7 @@ package Gui.MedicoVeterinarioGUI;
 import ClassiPrincipali.Personale;
 import ClassiPrincipali.Tartaruga;
 import Controller.Controller;
+import Gui.MainWindow.DatePicker;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -17,38 +18,35 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
-public class CompilaComponentiGUI extends JFrame {
+public class CompilaComponentiGUI extends JPanel {
     private JLabel becco, collo, testa, coda, pinne, occhi, naso;
     private JComboBox condizioneBecco, condizioneCollo, condizioneTesta, condizioneCoda, condizionePinne, condizioneOcchi, condizioneNaso;
-    private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
     private JButton conferma;
     private JTable listaTartarughe;
-    public CompilaComponentiGUI(Personale personale) throws SQLException {
-        super("Compila componenti tartaruga");
+    private Personale personale;
+    private Controller controller;
+    private DefaultTableModel tableModel;
+
+    public CompilaComponentiGUI() {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
-        Controller controller = new Controller();
+        controller = new Controller();
 
-        DefaultTableModel tableModel = new DefaultTableModel(){
+        tableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
                 //all cells false
                 return false;
             }
         };
+
         listaTartarughe = new JTable(tableModel);
         tableModel.addColumn("Targhetta");
         tableModel.addColumn("Nome");
 
         add(new JScrollPane(listaTartarughe));
-
-        ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
-
-        for (Tartaruga i: tartarughe) {
-            tableModel.addRow(new Object[] { i.getTarghetta() , i.getNomeTartaruga()});
-        }
 
         becco = new JLabel("becco");
         collo = new JLabel("collo");
@@ -67,19 +65,7 @@ public class CompilaComponentiGUI extends JFrame {
         condizioneOcchi = new JComboBox(condizioneString);
         condizioneNaso = new JComboBox(condizioneString);
 
-        UtilDateModel modelDate = new UtilDateModel();
-        java.util.Date today = new Date();
-        modelDate.setDate(today.getYear(), today.getMonth(), today.getDay());
-        modelDate.setSelected(true);
-        Properties p  = new Properties();
-        p.put("text.day", "Day");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
-
-        datePanel = new JDatePanelImpl(modelDate, p);
-        datePicker = new JDatePickerImpl(datePanel, null);
-        datePicker.setBounds(110, 100, 200, 25);
-        datePicker.setVisible(true);
+        datePicker = new DatePicker().Calendar();
         add(datePicker);
 
         conferma = new JButton("conferma");
@@ -121,9 +107,21 @@ public class CompilaComponentiGUI extends JFrame {
                 }
             }
         });
+    }
 
-        setSize(800, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+    public void populateListaTartarughe()
+    {
+        try {
+            ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
+
+            for (Tartaruga i: tartarughe) {
+                tableModel.addRow(new Object[] { i.getTarghetta() , i.getNomeTartaruga()});
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void setPersonale(Personale personale) {
+        this.personale = personale;
     }
 }
