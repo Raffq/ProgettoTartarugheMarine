@@ -1,4 +1,4 @@
-package Gui.OperatoreGUI;
+/*package Gui.OperatoreGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -70,3 +70,4 @@ public class OperatoreGUI extends JFrame {
     }
 
 }
+*/

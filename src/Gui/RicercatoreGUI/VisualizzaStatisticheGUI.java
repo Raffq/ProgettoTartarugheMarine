@@ -94,12 +94,12 @@ public class VisualizzaStatisticheGUI extends JFrame {
 
                 try {
                     statBeccoNumero = controller.countTartarugheCondizioneBeccoMese(condizioneScelta, meseScelto, annoScelto);
-                    statColloNumero = controller.countTartarugheCondizioneBeccoMese(condizioneScelta, meseScelto, annoScelto);
-                    statTestaNumero = controller.countTartarugheCondizioneBeccoMese(condizioneScelta, meseScelto, annoScelto);
-                    statCodaNumero = controller.countTartarugheCondizioneBeccoMese(condizioneScelta, meseScelto, annoScelto);
-                    statPinneNumero = controller.countTartarugheCondizioneBeccoMese(condizioneScelta, meseScelto, annoScelto);
-                    statOcchiNumero = controller.countTartarugheCondizioneBeccoMese(condizioneScelta, meseScelto, annoScelto);
-                    statNasoNumero = controller.countTartarugheCondizioneBeccoMese(condizioneScelta, meseScelto, annoScelto);
+                    statColloNumero = controller.countTartarugheCondizioneColloMese(condizioneScelta, meseScelto, annoScelto);
+                    statTestaNumero = controller.countTartarugheCondizioneTestaMese(condizioneScelta, meseScelto, annoScelto);
+                    statCodaNumero = controller.countTartarugheCondizioneCodaMese(condizioneScelta, meseScelto, annoScelto);
+                    statPinneNumero = controller.countTartarugheCondizionePinneMese(condizioneScelta, meseScelto, annoScelto);
+                    statOcchiNumero = controller.countTartarugheCondizioneOcchiMese(condizioneScelta, meseScelto, annoScelto);
+                    statNasoNumero = controller.countTartarugheCondizioneNasoMese(condizioneScelta, meseScelto, annoScelto);
                 } catch (SQLException e2) {
                     throw new RuntimeException();
                 }
@@ -122,12 +122,12 @@ public class VisualizzaStatisticheGUI extends JFrame {
 
                 try {
                     statBeccoNumero = controller.countTartarugheCondizioneBeccoAnno(condizioneScelta, annoScelto);
-                    statColloNumero = controller.countTartarugheCondizioneBeccoAnno(condizioneScelta, annoScelto);
-                    statTestaNumero = controller.countTartarugheCondizioneBeccoAnno(condizioneScelta, annoScelto);
-                    statCodaNumero = controller.countTartarugheCondizioneBeccoAnno(condizioneScelta, annoScelto);
-                    statPinneNumero = controller.countTartarugheCondizioneBeccoAnno(condizioneScelta, annoScelto);
-                    statOcchiNumero = controller.countTartarugheCondizioneBeccoAnno(condizioneScelta, annoScelto);
-                    statNasoNumero = controller.countTartarugheCondizioneBeccoAnno(condizioneScelta, annoScelto);
+                    statColloNumero = controller.countTartarugheCondizioneColloAnno(condizioneScelta, annoScelto);
+                    statTestaNumero = controller.countTartarugheCondizioneTestaAnno(condizioneScelta, annoScelto);
+                    statCodaNumero = controller.countTartarugheCondizioneCodaAnno(condizioneScelta, annoScelto);
+                    statPinneNumero = controller.countTartarugheCondizionePinneAnno(condizioneScelta, annoScelto);
+                    statOcchiNumero = controller.countTartarugheCondizioneOcchiAnno(condizioneScelta, annoScelto);
+                    statNasoNumero = controller.countTartarugheCondizioneNasoAnno(condizioneScelta, annoScelto);
                 } catch (SQLException e2) {
                     throw new RuntimeException();
                 }

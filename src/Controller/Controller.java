@@ -15,7 +15,7 @@ import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAOImpl;
 import Gui.AccediGUI;
 import Gui.MedicoVeterinarioGUI.*;
 import Gui.OperatoreGUI.AmmettiGUI;
-import Gui.OperatoreGUI.OperatoreGUI;
+//import Gui.OperatoreGUI.OperatoreGUI;
 import Gui.OperatoreGUI.RiammettiGUI;
 import Gui.OperatoreGUI.RilasciaGUI;
 import Gui.RicercatoreGUI.RicercatoreGUI;
@@ -56,7 +56,7 @@ public class Controller {
             }
         }
         //accedi
-        public void accedi (Personale personale){
+        /*public void accedi (Personale personale){
             if (personale instanceof Operatore) {
                 goToOperatore(personale);
             } else if (personale instanceof Medico_Veterinario) {
@@ -66,16 +66,16 @@ public class Controller {
             } else if (personale instanceof Ricercatore) {
                 goToRicercatore();
             }
-        }
+        }*/
         //schermate principali
         public void goToMedico_Veterinario(Personale personale){
             Medico_VeterinarioGUI mvt = new Medico_VeterinarioGUI(personale);
             mvt.setVisible(true);
         }
-        public void goToOperatore(Personale personale){
+        /*public void goToOperatore(Personale personale){
             OperatoreGUI op = new OperatoreGUI(personale);
             op.setVisible(true);
-        }
+        }*/
         public void goToRicercatore(){
             RicercatoreGUI ri = new RicercatoreGUI();
             ri.setVisible(true);
@@ -103,7 +103,7 @@ public class Controller {
             mct.setVisible(true);
         }
         //Operatore
-        public void goToAmmetti(Personale personale) {
+        /*public void goToAmmetti(Personale personale) {
             AmmettiGUI ammetti = new AmmettiGUI(personale);
             ammetti.setVisible(true);
         }
@@ -114,7 +114,7 @@ public class Controller {
         public void goToRilascia(Personale personale) throws SQLException {
             RilasciaGUI rilasciaTemp = new RilasciaGUI(personale);
             rilasciaTemp.setVisible(true);
-        }
+        }*/
         //Ricercatore
         public void goToStatistiche() {
             VisualizzaStatisticheGUI visualizzaStatistiche = new VisualizzaStatisticheGUI();
@@ -159,73 +159,73 @@ public class Controller {
         }
         //Tecnico Laboratorio metodi
         public int countTartarugheCondizioneBeccoAnno(String condizione, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneBeccoAnno(condizione, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneBeccoAnno(condizione, anno);
             return value;
         }
         public int countTartarugheCondizioneCodaAnno(String condizione, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneCodaAnno(condizione, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneCodaAnno(condizione, anno);
             return value;
         }
         public int countTartarugheCondizioneColloAnno(String condizione, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneColloAnno(condizione, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneColloAnno(condizione, anno);
             return value;
         }
         public int countTartarugheCondizioneNasoAnno(String condizione, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneNasoAnno(condizione, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneNasoAnno(condizione, anno);
             return value;
         }
         public int countTartarugheCondizioneOcchiAnno(String condizione, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneOcchiAnno(condizione, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneOcchiAnno(condizione, anno);
             return value;
         }
         public int countTartarugheCondizionePinneAnno(String condizione, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizionePinneAnno(condizione, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizionePinneAnno(condizione, anno);
             return value;
         }
         public int countTartarugheCondizioneTestaAnno(String condizione, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneTestaAnno(condizione, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneTestaAnno(condizione, anno);
             return value;
         }
         public int countTartarugheCondizioneBeccoMese(String condizione, int mese, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneBeccoMese(condizione, mese, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneBeccoMese(condizione, mese, anno);
             return value;
         }
         public int countTartarugheCondizioneCodaMese(String condizione, int mese, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneCodaMese(condizione, mese, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneCodaMese(condizione, mese, anno);
             return value;
         }
         public int countTartarugheCondizioneColloMese(String condizione, int mese, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneColloMese(condizione, mese, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneColloMese(condizione, mese, anno);
             return value;
         }
         public int countTartarugheCondizioneNasoMese(String condizione, int mese, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneNasoMese(condizione, mese, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneNasoMese(condizione, mese, anno);
             return value;
         }
         public int countTartarugheCondizioneOcchiMese(String condizione, int mese, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneOcchiMese(condizione, mese, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneOcchiMese(condizione, mese, anno);
             return value;
         }
         public int countTartarugheCondizionePinneMese(String condizione, int mese, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizionePinneMese(condizione, mese, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizionePinneMese(condizione, mese, anno);
             return value;
         }
         public int countTartarugheCondizioneTestaMese(String condizione, int mese, int anno) throws SQLException {
-            Tecnico_LaboratorioDAOImpl tecnico_laboratorioDAO = new Tecnico_LaboratorioDAOImpl();
-            int value = tecnico_laboratorioDAO.countTartarugheCondizioneTestaMese(condizione, mese, anno);
+            RicercatoreDAOImpl ricercatoreDAO = new RicercatoreDAOImpl();
+            int value = ricercatoreDAO.countTartarugheCondizioneTestaMese(condizione, mese, anno);
             return value;
         }
         //metodi cartella clinica e componenti

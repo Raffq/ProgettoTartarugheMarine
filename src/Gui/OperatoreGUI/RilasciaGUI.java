@@ -3,9 +3,9 @@ package Gui.OperatoreGUI;
 import ClassiPrincipali.Personale;
 import ClassiPrincipali.Tartaruga;
 import Controller.Controller;
+import Gui.MainWindow.DatePicker;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,24 +15,26 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Properties;
 
-public class RilasciaGUI extends JFrame {
+public class RilasciaGUI extends JPanel {
     private JTable listaTartarughe;
     private JButton conferma;
     private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
 
+    private Personale personale;
+    private Controller controller;
 
-    public RilasciaGUI(Personale personale) throws SQLException {
-        super("Rilascio tartaruga");
+    private DefaultTableModel tableModel;
+
+    public RilasciaGUI() {
 
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
-        Controller controller = new Controller();
+        controller = new Controller();
 
-        DefaultTableModel tableModel = new DefaultTableModel(){
+        tableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
                 //all cells false
@@ -45,25 +47,7 @@ public class RilasciaGUI extends JFrame {
 
         add(new JScrollPane(listaTartarughe));
 
-        ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
-
-        for (Tartaruga i: tartarughe) {
-            tableModel.addRow(new Object[] { i.getTarghetta() , i.getNomeTartaruga()});
-        }
-
-        UtilDateModel modelDate = new UtilDateModel();
-        java.util.Date today = new Date();
-        modelDate.setDate(today.getYear(), today.getMonth(), today.getDay());
-        modelDate.setSelected(true);
-        Properties p  = new Properties();
-        p.put("text.day", "Day");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
-
-        datePanel = new JDatePanelImpl(modelDate, p);
-        datePicker = new JDatePickerImpl(datePanel, null);
-        datePicker.setBounds(110, 100, 200, 25);
-        datePicker.setVisible(true);
+        datePicker = new DatePicker().Calendar();
         add(datePicker);
 
         conferma = new JButton("conferma");
@@ -82,11 +66,22 @@ public class RilasciaGUI extends JFrame {
                 }
             }
         });
+    }
 
-        setSize(800, 500);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+    public void populateListaTartarughe()
+    {
+        ArrayList<Tartaruga> tartarughe = null;
+        try {
+            tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (Tartaruga i: tartarughe) {
+            tableModel.addRow(new Object[] { i.getTarghetta() , i.getNomeTartaruga()});
+        }
+    }
+    public void SetPersonale(Personale personale) {
+        this.personale = personale;
     }
 }
-

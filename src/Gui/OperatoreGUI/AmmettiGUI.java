@@ -1,75 +1,52 @@
 package Gui.OperatoreGUI;
 
-
 import ClassiPrincipali.Personale;
-import DAO.Operatore.OperatoreDAOImpl;
-import org.jdatepicker.impl.JDatePanelImpl;
+import Gui.MainWindow.DatePicker;
 import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Properties;
 import Controller.Controller;
 
-public class AmmettiGUI extends JFrame {
+public class AmmettiGUI extends JPanel {
     private JTextField nomeTart;
     private JButton conferma;
-    private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
+    private Personale personale;
+    private Controller controller;
 
-    public AmmettiGUI(Personale personale) {
-        super("Ammissione tartaruga");
-
+    public AmmettiGUI() {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
+        controller = new Controller();
+
         nomeTart = new JTextField(15);
         conferma = new JButton("conferma");
-
         add(nomeTart);
         add(conferma);
-
-        UtilDateModel model = new UtilDateModel();
-        java.util.Date today = new Date();
-        model.setDate(today.getYear(), today.getMonth(), today.getDay());
-        model.setSelected(true);
-        Properties p  = new Properties();
-        p.put("text.day", "Day");
-        p.put("text.month", "Month");
-        p.put("text.year", "Year");
-
-        datePanel = new JDatePanelImpl(model, p);
-        datePicker = new JDatePickerImpl(datePanel, null);
-        datePicker.setBounds(110, 100, 200, 25);
-        datePicker.setVisible(true);
-
+        datePicker = new DatePicker().Calendar();
         add(datePicker);
-
         setSize(800, 500);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-        Controller controller = new Controller();
-        conferma.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Date selectedDate = (Date) datePicker.getModel().getValue();
-                    java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
-                    controller.ammetti(nomeTart.getText(), personale.getfkidcentro(), sqlDate);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
+
+        conferma.addActionListener(e -> {
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date selectedDate = dateFormat.parse(datePicker.getJFormattedTextField().getText());
+                java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
+                controller.ammetti(nomeTart.getText(), personale.getfkidcentro(), sqlDate);
+            } catch (SQLException | ParseException ex) {
+                throw new RuntimeException(ex);
             }
         });
+    }
+    public void SetPersonale(Personale personale) {
+        this.personale = personale;
     }
 }

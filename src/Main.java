@@ -1,4 +1,5 @@
-import Gui.MainWindow;
+import Controller.Controller;
+import Gui.MainWindow.MainWindow;
 
 import java.sql.*;
 
@@ -13,8 +14,7 @@ public class Main {
 */
         /*Tecnico_LaboratorioDAOImpl test = new Tecnico_LaboratorioDAOImpl();
         test.countTartarugheCondizioneBeccoAnno("compromesso", 2023);*/
-
-        MainWindow window = new MainWindow();
+        MainWindow window = new MainWindow(new Controller());
         //RiammettiTemp riammettiTemp=new RiammettiTemp();
 
         //prova

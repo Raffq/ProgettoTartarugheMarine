@@ -35,7 +35,7 @@ public class OperatoreDAOImpl implements OperatoreDAO {
     }
 
     @Override
-    public void ammetti(String nome, String idCentro, Date data) throws SQLException {
+    public void ammetti(String nome, String idCentro, Date dataAmmissione) throws SQLException {
         try {
             Connection con = Database.getConnection();
             String sql = "CALL ammetti(?, ?, ?)";
@@ -44,7 +44,7 @@ public class OperatoreDAOImpl implements OperatoreDAO {
 
             cs.setString(1, nome);
             cs.setString(2, idCentro);
-            cs.setDate(3, data);
+            cs.setDate(3, dataAmmissione);
 
             cs.execute();
 
@@ -53,15 +53,15 @@ public class OperatoreDAOImpl implements OperatoreDAO {
         }
     }
 
-    public void riammetti(String IdTar, Date data) throws SQLException {
+    public void riammetti(String idTar, Date dataRiammissione) throws SQLException {
         try {
             Connection con = Database.getConnection();
             String sql = "CALL riammetti(?, ?)";
 
             CallableStatement cs = con.prepareCall(sql);
 
-            cs.setString(1, IdTar);
-            cs.setDate(2, data);
+            cs.setString(1, idTar);
+            cs.setDate(2, dataRiammissione);
 
             cs.execute();
 
@@ -70,15 +70,15 @@ public class OperatoreDAOImpl implements OperatoreDAO {
         }
     }
 
-    public void rilascia(String IdTar, Date data) throws SQLException {
+    public void rilascia(String idTar, Date dataRilascio) throws SQLException {
         try {
             Connection con = Database.getConnection();
             String sql = "CALL rilascia(?, ?)";
 
             CallableStatement cs = con.prepareCall(sql);
 
-            cs.setString(1, IdTar);
-            cs.setDate(2, data);
+            cs.setString(1, idTar);
+            cs.setDate(2, dataRilascio);
 
             cs.execute();
 

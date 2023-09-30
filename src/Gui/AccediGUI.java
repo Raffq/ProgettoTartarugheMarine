@@ -2,64 +2,31 @@ package Gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.sql.*;
 import java.awt.Color;
 
-import ClassiPrincipali.*;
-import Controller.Controller;
+import static java.awt.Color.black;
 
-public class AccediGUI extends JFrame {
-    private JTextField matricola;
-    private JButton accedi;
-    private JLabel labelAccedi;
-    private Personale checkPersonale;
+public class AccediGUI extends JPanel {
 
-    public AccediGUI() {
-        super("Accedi");
+    private JButton buttonLogin;
+    private JTextField loginMatricola;
+
+    private JLabel accediLabel;
+
+    public AccediGUI(JButton buttonLogin, JTextField loginMatricola, JLabel accediLabel) {
+        this.buttonLogin = buttonLogin;
+        this.loginMatricola = loginMatricola;
+        this.accediLabel = accediLabel;
 
         setLayout(new BorderLayout());
-        setSize(200, 120);
-        setResizable(false);
+        setPreferredSize(new Dimension(200, 120));
+        setBorder(BorderFactory.createMatteBorder(
+                1, 1, 1, 1, black));
 
-        matricola = new JTextField();
-        accedi = new JButton("Accedi");
-        labelAccedi = new JLabel();
+        buttonLogin.setBackground(Color.gray);
 
-        labelAccedi.setText("Inserisci matricola");
-
-        matricola.setBackground(Color.lightGray);
-
-        add(labelAccedi, BorderLayout.PAGE_START);
-        add(matricola, BorderLayout.CENTER);
-        add(accedi, BorderLayout.PAGE_END);
-
-
-
-        Controller controller = new Controller();
-
-        accedi.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String matricolatemp = matricola.getText();
-                try {
-                    checkPersonale = controller.controllaMatricola(matricolatemp);
-                    if(checkPersonale != null) {
-                        controller.accedi(checkPersonale);
-                        dispose();
-                    }
-                    else {
-                        labelAccedi.setForeground(Color.RED);
-                        labelAccedi.setText("Matricola errata!");
-                    }
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        add(accediLabel, BorderLayout.PAGE_START);
+        add(loginMatricola, BorderLayout.CENTER);
+        add(buttonLogin, BorderLayout.PAGE_END);
     }
 }
