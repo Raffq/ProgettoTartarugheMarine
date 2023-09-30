@@ -1,6 +1,5 @@
 package Gui.MedicoVeterinarioGUI;
 
-import ClassiPrincipali.Cartella_Clinica;
 import ClassiPrincipali.Personale;
 import ClassiPrincipali.Tartaruga;
 import Controller.Controller;
@@ -14,12 +13,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ModificaCartellaClinicaGUI extends JPanel {
-    private JTable listaCartelleCliniche;
+    private JTable listaTartarughe;
     private JTextField specie;
     private JTextField lunghezza;
     private JTextField larghezza;
     private JTextField peso;
     private JTextField luogoRitrovamento;
+
+    private JLabel specieLabel, lunghezzaLabel, larghezzaLabel, pesoLabel, luogoRitrovamentoLabel;
     private JButton conferma;
     private Personale personale;
     private DefaultTableModel model;
@@ -30,6 +31,7 @@ public class ModificaCartellaClinicaGUI extends JPanel {
 
         controller = new Controller();
 
+
         model = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -38,23 +40,30 @@ public class ModificaCartellaClinicaGUI extends JPanel {
             }
         };
 
-        listaCartelleCliniche = new JTable(model);
-        model.addColumn("IdCartellaClinica");
+        listaTartarughe = new JTable(model);
         model.addColumn("Targhetta");
+        model.addColumn("Nome");
 
-        JScrollPane scrollPane = new JScrollPane(listaCartelleCliniche);
+        JScrollPane scrollPane = new JScrollPane(listaTartarughe);
 
-        specie = new JTextField("specie");
-        lunghezza = new JTextField("lunghezza");
-        larghezza = new JTextField("larghezza");
-        peso = new JTextField("peso");
-        luogoRitrovamento = new JTextField("luogoRit");
+
+        specieLabel = new JLabel("specie");
+        lunghezzaLabel = new JLabel("lunghezza");
+        larghezzaLabel = new JLabel("larghezza");
+        pesoLabel = new JLabel("peso");
+        luogoRitrovamentoLabel = new JLabel("luogoRit");
         conferma = new JButton("conferma");
+
+        specie = new JTextField(20);
+        lunghezza = new JTextField(20);
+        larghezza = new JTextField(20);
+        peso = new JTextField(20);
+        luogoRitrovamento = new JTextField(20);
 
         conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String tartarugaScelta = (String) listaCartelleCliniche.getValueAt(listaCartelleCliniche.getSelectedRow(), 0);
+                String tartarugaScelta = (String) listaTartarughe.getValueAt(listaTartarughe.getSelectedRow(), 0);
                 String specieScelta = specie.getText();
                 String lunghezzaSceltaTemp = lunghezza.getText();
                 int lunghezzaScelta = Integer.parseInt(lunghezzaSceltaTemp);
@@ -65,19 +74,40 @@ public class ModificaCartellaClinicaGUI extends JPanel {
                 String luogoRitrovamentoScelto = luogoRitrovamento.getText();
 
                 try {
-                    controller.updateCartellaClinica(tartarugaScelta, specieScelta,lunghezzaScelta, larghezzaScelta, pesoScelto, luogoRitrovamentoScelto, personale.getMatricola());
+                    controller.compileLastCartellaClinica(tartarugaScelta, specieScelta,lunghezzaScelta, larghezzaScelta, pesoScelto, luogoRitrovamentoScelto, personale.getMatricola());
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
             }
         });
 
+        JPanel labelsPanel = new JPanel();
+        JPanel fieldsPanel = new JPanel();
+        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
+        fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS));
+
         add(scrollPane);
-        add(specie);
-        add(lunghezza);
-        add(larghezza);
-        add(peso);
-        add(luogoRitrovamento);
+
+        labelsPanel.add(specieLabel);
+        fieldsPanel.add(specie);
+        labelsPanel.add(new Box.Filler(new Dimension(2, 2), new Dimension(2, 2), new Dimension(2, 2)));
+        labelsPanel.add(lunghezzaLabel);
+        fieldsPanel.add(lunghezza);
+        labelsPanel.add(new Box.Filler(new Dimension(2, 2), new Dimension(2, 2), new Dimension(2, 2)));
+        labelsPanel.add(larghezzaLabel);
+        fieldsPanel.add(larghezza);
+        labelsPanel.add(new Box.Filler(new Dimension(2, 2), new Dimension(2, 2), new Dimension(2, 2)));
+        labelsPanel.add(pesoLabel);
+        fieldsPanel.add(peso);
+        labelsPanel.add(new Box.Filler(new Dimension(2, 2), new Dimension(2, 2), new Dimension(2, 2)));
+        labelsPanel.add(luogoRitrovamentoLabel);
+        fieldsPanel.add(luogoRitrovamento);
+
+        JPanel fixPanel = new JPanel();
+        fixPanel.add(labelsPanel);
+        fixPanel.add(fieldsPanel);
+        add(fixPanel);
+
         add(conferma);
 
     }
@@ -85,11 +115,11 @@ public class ModificaCartellaClinicaGUI extends JPanel {
     public void populateListaTartarughe()
     {
         try {
-            ArrayList<Cartella_Clinica> data = new ArrayList<>();
-            data = controller.getCartelleCliniche();
+            ArrayList<Tartaruga> data = new ArrayList<>();
+            data = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
 
-            for(Cartella_Clinica i : data){
-                model.addRow(new Object[]{i.getIdCartellaClinica(), i.getFktarghetta()});
+            for(Tartaruga i : data){
+                model.addRow(new Object[]{i.getTarghetta(), i.getNomeTartaruga()});
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

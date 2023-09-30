@@ -1,6 +1,5 @@
 package Gui.MedicoVeterinarioGUI;
 
-import ClassiPrincipali.Componenti;
 import ClassiPrincipali.Personale;
 import ClassiPrincipali.Tartaruga;
 import Controller.Controller;
@@ -22,17 +21,13 @@ import java.util.Properties;
 public class ModificaComponentiGUI extends JPanel {
     private JLabel becco, collo, testa, coda, pinne, occhi, naso;
     private JComboBox condizioneBecco, condizioneCollo, condizioneTesta, condizioneCoda, condizionePinne, condizioneOcchi, condizioneNaso;
-    private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
     private JButton conferma;
-    private JTable listaComponenti;
+    private JTable listaTartarughe;
     private DefaultTableModel tableModel;
     private Controller controller;
     private Personale personale;
     public ModificaComponentiGUI() {
-        FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
-        setLayout(flowLayout);
-
         controller = new Controller();
 
         tableModel = new DefaultTableModel(){
@@ -41,13 +36,11 @@ public class ModificaComponentiGUI extends JPanel {
                 return false;
             }
         };
-
-        listaComponenti = new JTable(tableModel);
-        tableModel.addColumn("IdComponenti");
+        listaTartarughe = new JTable(tableModel);
         tableModel.addColumn("Targhetta");
-        tableModel.addColumn("IdCartellaClinica");
+        tableModel.addColumn("Nome");
 
-        add(new JScrollPane(listaComponenti));
+        add(new JScrollPane(listaTartarughe), BorderLayout.LINE_START);
 
         becco = new JLabel("becco");
         collo = new JLabel("collo");
@@ -66,41 +59,61 @@ public class ModificaComponentiGUI extends JPanel {
         condizioneOcchi = new JComboBox(condizioneString);
         condizioneNaso = new JComboBox(condizioneString);
 
+
+        UtilDateModel modelDate = new UtilDateModel();
+        java.util.Date today = new Date();
+        modelDate.setDate(today.getYear(), today.getMonth(), today.getDay());
+        modelDate.setSelected(true);
+        Properties p  = new Properties();
+        p.put("text.day", "Day");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+
         datePicker = new DatePicker().Calendar();
         add(datePicker);
 
         conferma = new JButton("conferma");
 
-
         JPanel labelsPanel = new JPanel();
         JPanel condizionePanel = new JPanel();
+        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
+        condizionePanel.setLayout(new BoxLayout(condizionePanel, BoxLayout.Y_AXIS));
+
 
         labelsPanel.add(becco);
         condizionePanel.add(condizioneBecco);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
         labelsPanel.add(collo);
         condizionePanel.add(condizioneCollo);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
         labelsPanel.add(testa);
         condizionePanel.add(condizioneTesta);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
         labelsPanel.add(coda);
         condizionePanel.add(condizioneCoda);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
         labelsPanel.add(pinne);
         condizionePanel.add(condizionePinne);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
         labelsPanel.add(occhi);
         condizionePanel.add(condizioneOcchi);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
         labelsPanel.add(naso);
         condizionePanel.add(condizioneNaso);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
 
         JPanel fixPanel = new JPanel();
-        fixPanel.add(labelsPanel, BorderLayout.PAGE_START);
-        fixPanel.add(condizionePanel, BorderLayout.PAGE_END);
+        fixPanel.add(labelsPanel);
+        fixPanel.add(condizionePanel);
 
         add(fixPanel);
         add(conferma);
 
+
         conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedCellValue = (String) listaComponenti.getValueAt(listaComponenti.getSelectedRow(),0);
+                String selectedCellValue = (String) listaTartarughe.getValueAt(listaTartarughe.getSelectedRow(),0);
                 Date selectedDate = (Date) datePicker.getModel().getValue();
                 java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
 
@@ -112,7 +125,7 @@ public class ModificaComponentiGUI extends JPanel {
                 String selectedCondizioneOcchi = (String) condizioneOcchi.getSelectedItem();
                 String selectedCondizioneNaso = (String) condizioneNaso.getSelectedItem();
                 try {
-                    controller.updateComponenti(selectedCellValue, sqlDate, selectedCondizioneBecco, selectedCondizioneCollo, selectedCondizioneTesta, selectedCondizioneCoda, selectedCondizionePinne, selectedCondizioneOcchi, selectedCondizioneNaso);
+                    controller.compileComponenti(selectedCellValue, sqlDate, selectedCondizioneBecco, selectedCondizioneCollo, selectedCondizioneTesta, selectedCondizioneCoda, selectedCondizionePinne, selectedCondizioneOcchi, selectedCondizioneNaso);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -123,10 +136,10 @@ public class ModificaComponentiGUI extends JPanel {
     public void populateListaTartarughe()
     {
         try {
-            ArrayList<Componenti> componenti = controller.getComponenti();
+            ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
 
-            for (Componenti i: componenti) {
-                tableModel.addRow(new Object[] { i.getIdcomponenti() , i.getFktarghetta(), i.getFkIdCartellaClinica()});
+            for (Tartaruga i: tartarughe) {
+                tableModel.addRow(new Object[] { i.getTarghetta() , i.getNomeTartaruga()});
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);

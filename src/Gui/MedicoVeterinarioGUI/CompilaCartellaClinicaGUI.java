@@ -19,6 +19,9 @@ public class CompilaCartellaClinicaGUI extends JPanel {
     private JTextField larghezza;
     private JTextField peso;
     private JTextField luogoRitrovamento;
+
+    private JLabel specieLabel, lunghezzaLabel, larghezzaLabel, pesoLabel, luogoRitrovamentoLabel;
+
     private JButton conferma;
     private Controller controller;
     private Personale personale;
@@ -43,13 +46,20 @@ public class CompilaCartellaClinicaGUI extends JPanel {
 
 
         JScrollPane scrollPane = new JScrollPane(listaTartarughe);
+        add(scrollPane);
 
-        specie = new JTextField("specie");
-        lunghezza = new JTextField("lunghezza");
-        larghezza = new JTextField("larghezza");
-        peso = new JTextField("peso");
-        luogoRitrovamento = new JTextField("luogoRit");
+        specieLabel = new JLabel("specie");
+        lunghezzaLabel = new JLabel("lunghezza");
+        larghezzaLabel = new JLabel("larghezza");
+        pesoLabel = new JLabel("peso");
+        luogoRitrovamentoLabel = new JLabel("luogoRit");
         conferma = new JButton("conferma");
+
+        specie = new JTextField(20);
+        lunghezza = new JTextField(20);
+        larghezza = new JTextField(20);
+        peso = new JTextField(20);
+        luogoRitrovamento = new JTextField(20);
 
         conferma.addActionListener(new ActionListener() {
             @Override
@@ -72,12 +82,32 @@ public class CompilaCartellaClinicaGUI extends JPanel {
             }
         });
 
+        JPanel labelsPanel = new JPanel();
+        JPanel fieldsPanel = new JPanel();
+        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
+        fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS));
+
         add(scrollPane);
-        add(specie);
-        add(lunghezza);
-        add(larghezza);
-        add(peso);
-        add(luogoRitrovamento);
+
+        labelsPanel.add(specieLabel);
+        fieldsPanel.add(specie);
+        labelsPanel.add(new Box.Filler(new Dimension(2, 2), new Dimension(2, 2), new Dimension(2, 2)));
+        labelsPanel.add(lunghezzaLabel);
+        fieldsPanel.add(lunghezza);
+        labelsPanel.add(new Box.Filler(new Dimension(2, 2), new Dimension(2, 2), new Dimension(2, 2)));
+        labelsPanel.add(larghezzaLabel);
+        fieldsPanel.add(larghezza);
+        labelsPanel.add(new Box.Filler(new Dimension(2, 2), new Dimension(2, 2), new Dimension(2, 2)));
+        labelsPanel.add(pesoLabel);
+        fieldsPanel.add(peso);
+        labelsPanel.add(new Box.Filler(new Dimension(2, 2), new Dimension(2, 2), new Dimension(2, 2)));
+        labelsPanel.add(luogoRitrovamentoLabel);
+        fieldsPanel.add(luogoRitrovamento);
+
+        JPanel fixPanel = new JPanel();
+        fixPanel.add(labelsPanel);
+        fixPanel.add(fieldsPanel);
+        add(fixPanel);
         add(conferma);
 
     }
@@ -87,7 +117,9 @@ public class CompilaCartellaClinicaGUI extends JPanel {
         try {
             ArrayList<Tartaruga> data = new ArrayList<>();
 
+            if(personale != null) {
                 data = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
+            }
 
             for(Tartaruga i : data){
                 this.tableModel.addRow(new Object[]{i.getTarghetta(), i.getNomeTartaruga()});
@@ -101,4 +133,3 @@ public class CompilaCartellaClinicaGUI extends JPanel {
         this.personale = personale;
     }
 }
-

@@ -12,6 +12,8 @@ public class VisualizzaStatisticheGUI extends JPanel {
     private JLabel statBecco, statCollo, statTesta, statCoda, statPinne, statOcchi, statNaso;
     private JLabel textBecco, textCollo, textTesta, textCoda, textPinne, textOcchi, textNaso;
 
+    private JLabel annoLabel, meseLabel, condizioneLabel;
+
     private JComboBox sceltaMese, sceltaAnno, sceltaCondizione;
     Integer statBeccoNumero, statColloNumero, statTestaNumero, statCodaNumero, statPinneNumero, statOcchiNumero, statNasoNumero;
     Integer meseScelto, annoScelto;
@@ -39,6 +41,10 @@ public class VisualizzaStatisticheGUI extends JPanel {
         statOcchi = new JLabel();
         statNaso = new JLabel();
 
+        condizioneLabel = new JLabel("Scegli condizione:");
+        annoLabel = new JLabel("Scegli anno:");
+        meseLabel = new JLabel("scegli mese:");
+
         ArrayList<Integer> listaMesi = new ArrayList<>();
         ArrayList<Integer> listaAnni = new ArrayList<>();
 
@@ -59,26 +65,42 @@ public class VisualizzaStatisticheGUI extends JPanel {
         mese = new JButton("Mensile");
         anno = new JButton("Annuale");
 
-        add(textBecco);
-        add(statBecco);
-        add(textCollo);
-        add(statCollo);
-        add(textTesta);
-        add(statTesta);
-        add(textCoda);
-        add(statCoda);
-        add(textPinne);
-        add(statPinne);
-        add(textOcchi);
-        add(statOcchi);
-        add(textNaso);
-        add(statNaso);
+
+        JPanel labelsPanel = new JPanel();
+        JPanel fieldsPanel = new JPanel();
+        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
+        fieldsPanel.setLayout(new BoxLayout(fieldsPanel, BoxLayout.Y_AXIS));
+
+        labelsPanel.add(textBecco);
+        fieldsPanel.add(statBecco);
+        labelsPanel.add(textCollo);
+        fieldsPanel.add(statCollo);
+        labelsPanel.add(textTesta);
+        fieldsPanel.add(statTesta);
+        labelsPanel.add(textCoda);
+        fieldsPanel.add(statCoda);
+        labelsPanel.add(textPinne);
+        fieldsPanel.add(statPinne);
+        labelsPanel.add(textOcchi);
+        fieldsPanel.add(statOcchi);
+        labelsPanel.add(textNaso);
+        fieldsPanel.add(statNaso);
+
+        add(meseLabel);
         add(sceltaMese);
+        add(annoLabel);
         add(sceltaAnno);
+        add(condizioneLabel);
         add(sceltaCondizione);
+
 
         add(mese);
         add(anno);
+
+        JPanel fixPanel = new JPanel();
+        fixPanel.add(labelsPanel);
+        fixPanel.add(fieldsPanel);
+        add(fixPanel);
 
         mese.addActionListener(new ActionListener() {
             @Override

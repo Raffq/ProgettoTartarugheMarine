@@ -70,20 +70,38 @@ public class CompilaComponentiGUI extends JPanel {
 
         conferma = new JButton("conferma");
 
-        add(becco);
-        add(condizioneBecco);
-        add(collo);
-        add(condizioneCollo);
-        add(testa);
-        add(condizioneTesta);
-        add(coda);
-        add(condizioneCoda);
-        add(pinne);
-        add(condizionePinne);
-        add(occhi);
-        add(condizioneOcchi);
-        add(naso);
-        add(condizioneNaso);
+        JPanel labelsPanel = new JPanel();
+        JPanel condizionePanel = new JPanel();
+        labelsPanel.setLayout(new BoxLayout(labelsPanel, BoxLayout.Y_AXIS));
+        condizionePanel.setLayout(new BoxLayout(condizionePanel, BoxLayout.Y_AXIS));
+
+        labelsPanel.add(becco);
+        condizionePanel.add(condizioneBecco);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
+        labelsPanel.add(collo);
+        condizionePanel.add(condizioneCollo);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
+        labelsPanel.add(testa);
+        condizionePanel.add(condizioneTesta);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
+        labelsPanel.add(coda);
+        condizionePanel.add(condizioneCoda);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
+        labelsPanel.add(pinne);
+        condizionePanel.add(condizionePinne);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
+        labelsPanel.add(occhi);
+        condizionePanel.add(condizioneOcchi);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
+        labelsPanel.add(naso);
+        condizionePanel.add(condizioneNaso);
+        labelsPanel.add(new Box.Filler(new Dimension(10, 10), new Dimension(10, 10), new Dimension(10, 10)));
+
+        JPanel fixPanel = new JPanel();
+        fixPanel.add(labelsPanel);
+        fixPanel.add(condizionePanel);
+
+        add(fixPanel);
         add(conferma);
 
         conferma.addActionListener(new ActionListener() {
