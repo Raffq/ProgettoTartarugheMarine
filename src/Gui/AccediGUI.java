@@ -8,21 +8,14 @@ import java.awt.Color;
 
 import ClassiPrincipali.*;
 import Controller.Controller;
-import DAO.Medico_Veterinario.Medico_VeterinarioDAO;
-import DAO.Medico_Veterinario.Medico_VeterinarioDAOImpl;
-import DAO.Operatore.OperatoreDAO;
-import DAO.Operatore.OperatoreDAOImpl;
-import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAO;
-import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAOImpl;
-import Gui.OperatoreGUI.OperatoreTemp;
 
-public class AccediTemp extends JFrame {
+public class AccediGUI extends JFrame {
     private JTextField matricola;
     private JButton accedi;
     private JLabel labelAccedi;
-    private Personale ps;
+    private Personale checkPersonale;
 
-    public AccediTemp() {
+    public AccediGUI() {
         super("Accedi");
 
         setLayout(new BorderLayout());
@@ -50,15 +43,14 @@ public class AccediTemp extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String matricolatemp = matricola.getText();
                 try {
-                    ps = controller.controllaMatricola(matricolatemp);
-                    if(ps != null) {
-                        controller.accedi(ps);
+                    checkPersonale = controller.controllaMatricola(matricolatemp);
+                    if(checkPersonale != null) {
+                        controller.accedi(checkPersonale);
                         dispose();
                     }
                     else {
                         labelAccedi.setForeground(Color.RED);
                         labelAccedi.setText("Matricola errata!");
-
                     }
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);

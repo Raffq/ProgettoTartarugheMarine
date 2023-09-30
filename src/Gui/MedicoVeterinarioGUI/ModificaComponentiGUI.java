@@ -1,5 +1,6 @@
 package Gui.MedicoVeterinarioGUI;
 
+import ClassiPrincipali.Componenti;
 import ClassiPrincipali.Personale;
 import ClassiPrincipali.Tartaruga;
 import Controller.Controller;
@@ -17,37 +18,36 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
-public class CompilaComponentiTemp extends JFrame {
+public class ModificaComponentiGUI extends JFrame {
     private JLabel becco, collo, testa, coda, pinne, occhi, naso;
     private JComboBox condizioneBecco, condizioneCollo, condizioneTesta, condizioneCoda, condizionePinne, condizioneOcchi, condizioneNaso;
     private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
     private JButton conferma;
-    private JTable listaTartarughe;
-    public CompilaComponentiTemp(Personale personale) throws SQLException {
-        super("Compila componenti tartaruga");
+    private JTable listaComponenti;
+    public ModificaComponentiGUI(Personale personale) throws SQLException {
+        super("Modifica componenti tartaruga");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
         Controller controller = new Controller();
 
-        DefaultTableModel tableModel = new DefaultTableModel(){
+        DefaultTableModel model = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
-                //all cells false
                 return false;
             }
         };
-        listaTartarughe = new JTable(tableModel);
-        tableModel.addColumn("Targhetta");
-        tableModel.addColumn("Nome");
+        listaComponenti = new JTable(model);
+        Object[] columns = {"idcomponente", "targhetta tartaruga", "id cartella clinica"};
+        model.setColumnIdentifiers(columns);
 
-        add(new JScrollPane(listaTartarughe));
+        add(new JScrollPane(listaComponenti));
 
-        ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
+        ArrayList<Componenti> componenti = controller.getComponenti();
 
-        for (Tartaruga i: tartarughe) {
-            tableModel.addRow(new Object[] { i.getTarghetta() , i.getNomeTartaruga()});
+        for (Componenti i: componenti) {
+            model.addRow(new Object[] { i.getIdcomponenti(), i.getFktarghetta(), i.getFkIdCartellaClinica()});
         }
 
         becco = new JLabel("becco");
@@ -103,7 +103,7 @@ public class CompilaComponentiTemp extends JFrame {
         conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedCellValue = (String) listaTartarughe.getValueAt(listaTartarughe.getSelectedRow(),0);
+                String selectedCellValue = (String) listaComponenti.getValueAt(listaComponenti.getSelectedRow(),0);
                 Date selectedDate = (Date) datePicker.getModel().getValue();
                 java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
 
@@ -115,7 +115,7 @@ public class CompilaComponentiTemp extends JFrame {
                 String selectedCondizioneOcchi = (String) condizioneOcchi.getSelectedItem();
                 String selectedCondizioneNaso = (String) condizioneNaso.getSelectedItem();
                 try {
-                    controller.compileComponenti(selectedCellValue, sqlDate, selectedCondizioneBecco, selectedCondizioneCollo, selectedCondizioneTesta, selectedCondizioneCoda, selectedCondizionePinne, selectedCondizioneOcchi, selectedCondizioneNaso);
+                    controller.updateComponenti(selectedCellValue, sqlDate, selectedCondizioneBecco, selectedCondizioneCollo, selectedCondizioneTesta, selectedCondizioneCoda, selectedCondizionePinne, selectedCondizioneOcchi, selectedCondizioneNaso);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

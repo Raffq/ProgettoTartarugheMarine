@@ -1,6 +1,8 @@
 package Controller;
 
 import ClassiPrincipali.*;
+import DAO.Cartella_Clinica.Cartella_ClinicaDAOImpl;
+import DAO.Componenti.ComponentiDAOImpl;
 import DAO.Medico_Veterinario.Medico_VeterinarioDAO;
 import DAO.Medico_Veterinario.Medico_VeterinarioDAOImpl;
 import DAO.Operatore.OperatoreDAO;
@@ -10,27 +12,22 @@ import DAO.Ricercatore.RicercatoreDAOImpl;
 import DAO.Tartaruga.TartarugaDAOImpl;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAO;
 import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAOImpl;
-import Gui.AccediTemp;
-import Gui.MedicoVeterinarioGUI.CompilaCartellaClinicaTemp;
-import Gui.MedicoVeterinarioGUI.CompilaComponentiTemp;
-import Gui.MedicoVeterinarioGUI.Medico_VeterinarioTemp;
-import Gui.OperatoreGUI.AmmettiTemp;
-import Gui.OperatoreGUI.OperatoreTemp;
-import Gui.OperatoreGUI.RiammettiTemp;
-import Gui.OperatoreGUI.RilasciaTemp;
-import Gui.RicercatoreGUI.RicercatoreTemp;
-import Gui.RicercatoreGUI.VisualizzaStatisticheTemp;
-import Gui.TecnicoLaboratorioGUI.Tecnico_LaboratorioTemp;
+import Gui.AccediGUI;
+import Gui.MedicoVeterinarioGUI.*;
+import Gui.OperatoreGUI.AmmettiGUI;
+import Gui.OperatoreGUI.OperatoreGUI;
+import Gui.OperatoreGUI.RiammettiGUI;
+import Gui.OperatoreGUI.RilasciaGUI;
+import Gui.RicercatoreGUI.RicercatoreGUI;
+import Gui.RicercatoreGUI.VisualizzaStatisticheGUI;
+import Gui.TecnicoLaboratorioGUI.Tecnico_LaboratorioGUI;
 
-import javax.swing.*;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Controller {
-    AccediTemp accediTemp; //TEST
+    AccediGUI accedi; //TEST
     public Controller() {}
         public Personale controllaMatricola(String MatricolaTemp) throws SQLException {
             if (MatricolaTemp.substring(0, 2).equals("OP")) {
@@ -72,47 +69,55 @@ public class Controller {
         }
         //schermate principali
         public void goToMedico_Veterinario(Personale personale){
-            Medico_VeterinarioTemp mvt = new Medico_VeterinarioTemp(personale);
+            Medico_VeterinarioGUI mvt = new Medico_VeterinarioGUI(personale);
             mvt.setVisible(true);
         }
         public void goToOperatore(Personale personale){
-            OperatoreTemp mvt = new OperatoreTemp(personale);
-            mvt.setVisible(true);
+            OperatoreGUI op = new OperatoreGUI(personale);
+            op.setVisible(true);
         }
         public void goToRicercatore(){
-            RicercatoreTemp ri = new RicercatoreTemp();
+            RicercatoreGUI ri = new RicercatoreGUI();
             ri.setVisible(true);
         }
         public void goToTecnico_Laboratorio(){
-            Tecnico_LaboratorioTemp tl = new Tecnico_LaboratorioTemp();
+            Tecnico_LaboratorioGUI tl = new Tecnico_LaboratorioGUI();
             tl.setVisible(true);
         }
 
         //medico veterinario
         public void goToCompilaCartellaClinica(Personale personale) throws SQLException {
-            CompilaCartellaClinicaTemp ccct = new CompilaCartellaClinicaTemp(personale);
-            ccct.setVisible(true);
+            CompilaCartellaClinicaGUI ccc = new CompilaCartellaClinicaGUI(personale);
+            ccc.setVisible(true);
         }
         public void goToCompilaComponenti(Personale personale) throws SQLException {
-            CompilaComponentiTemp cct = new CompilaComponentiTemp(personale);
+            CompilaComponentiGUI cct = new CompilaComponentiGUI(personale);
             cct.setVisible(true);
+        }
+        public void goToModificaCartellaClinica(Personale personale) throws SQLException {
+            ModificaCartellaClinicaGUI mcc = new ModificaCartellaClinicaGUI(personale);
+            mcc.setVisible(true);
+        }
+        public void goToModificaComponenti(Personale personale) throws SQLException{
+            ModificaComponentiGUI mct = new ModificaComponentiGUI(personale);
+            mct.setVisible(true);
         }
         //Operatore
         public void goToAmmetti(Personale personale) {
-            AmmettiTemp ammetti = new AmmettiTemp(personale);
+            AmmettiGUI ammetti = new AmmettiGUI(personale);
             ammetti.setVisible(true);
         }
         public void goToRiammetti(Personale personale) throws SQLException {
-            RiammettiTemp riammetti = new RiammettiTemp(personale);
+            RiammettiGUI riammetti = new RiammettiGUI(personale);
             riammetti.setVisible(true);
         }
         public void goToRilascia(Personale personale) throws SQLException {
-            RilasciaTemp rilasciaTemp = new RilasciaTemp(personale);
+            RilasciaGUI rilasciaTemp = new RilasciaGUI(personale);
             rilasciaTemp.setVisible(true);
         }
         //Ricercatore
         public void goToStatistiche() {
-            VisualizzaStatisticheTemp visualizzaStatistiche = new VisualizzaStatisticheTemp();
+            VisualizzaStatisticheGUI visualizzaStatistiche = new VisualizzaStatisticheGUI();
             visualizzaStatistiche.setVisible(true);
         }
         //metodi Operatore
@@ -223,4 +228,14 @@ public class Controller {
             int value = tecnico_laboratorioDAO.countTartarugheCondizioneTestaMese(condizione, mese, anno);
             return value;
         }
+        //metodi cartella clinica e componenti
+        public ArrayList<Cartella_Clinica> getCartelleCliniche() throws SQLException {
+            Cartella_ClinicaDAOImpl cartellaClinicaDAO = new Cartella_ClinicaDAOImpl();
+            return cartellaClinicaDAO.getCartelleCliniche();
+        }
+        public ArrayList<Componenti> getComponenti() throws SQLException{
+            ComponentiDAOImpl ComponentiDAO = new ComponentiDAOImpl();
+            return ComponentiDAO.getComponenti();
+        }
+
     }

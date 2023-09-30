@@ -1,8 +1,8 @@
 package Gui.OperatoreGUI;
+
 import ClassiPrincipali.Personale;
 import ClassiPrincipali.Tartaruga;
 import Controller.Controller;
-import DAO.Operatore.OperatoreDAOImpl;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -17,19 +17,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
-public class RiammettiTemp extends JFrame {
+public class RilasciaGUI extends JFrame {
     private JTable listaTartarughe;
     private JButton conferma;
     private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
 
 
-    public RiammettiTemp(Personale personale) throws SQLException {
-        super("Riammissione tartaruga");
+    public RilasciaGUI(Personale personale) throws SQLException {
+        super("Rilascio tartaruga");
 
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
-        Controller controller=new Controller();
+
+        Controller controller = new Controller();
 
         DefaultTableModel tableModel = new DefaultTableModel(){
             @Override
@@ -44,7 +45,7 @@ public class RiammettiTemp extends JFrame {
 
         add(new JScrollPane(listaTartarughe));
 
-        ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), false);
+        ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
 
         for (Tartaruga i: tartarughe) {
             tableModel.addRow(new Object[] { i.getTarghetta() , i.getNomeTartaruga()});
@@ -68,27 +69,24 @@ public class RiammettiTemp extends JFrame {
         conferma = new JButton("conferma");
         add(conferma);
 
-        setSize(800, 500);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
-       conferma.addActionListener(new ActionListener() {
+        conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedCellValue = (String) listaTartarughe.getValueAt(listaTartarughe.getSelectedRow() , 0);
+                String selectedCellValue = (String) listaTartarughe.getValueAt(listaTartarughe.getSelectedRow(), 0);
                 Date selectedDate = (Date) datePicker.getModel().getValue();
                 java.sql.Date sqlDate = new java.sql.Date(selectedDate.getTime());
                 try {
-                    controller.riammetti(selectedCellValue, sqlDate);
+                    controller.rilascia(selectedCellValue, sqlDate);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
             }
-       });
+        });
+
+        setSize(800, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
 }
 
-
-
-//operatoreDAOImpl.riammetti(,sqlDate);

@@ -19,13 +19,13 @@ import java.util.Date;
 import java.util.Properties;
 import Controller.Controller;
 
-public class AmmettiTemp extends JFrame {
+public class AmmettiGUI extends JFrame {
     private JTextField nomeTart;
     private JButton conferma;
     private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
 
-    public AmmettiTemp(Personale personale) {
+    public AmmettiGUI(Personale personale) {
         super("Ammissione tartaruga");
 
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);

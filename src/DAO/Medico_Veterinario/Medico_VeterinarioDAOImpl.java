@@ -104,7 +104,7 @@ public class Medico_VeterinarioDAOImpl implements Medico_VeterinarioDAO {
     public void updateComponenti(String idComponenti, Date dataCompilazione, String descBecco, String descCollo, String descTesta, String descCoda, String descPinne, String descOcchi, String descNaso) throws SQLException {
         try {
             Connection con = Database.getConnection();
-            String sql = "CALL updateComponenti(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "CALL updateComponenti(?, ?, ?::condizione, ?::condizione, ?::condizione, ?::condizione, ?::condizione, ?::condizione, ?::condizione)";
 
             CallableStatement cs = con.prepareCall(sql);
 

@@ -1,14 +1,6 @@
-import ClassiPrincipali.Tartaruga;
-import Controller.Controller;
-import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAO;
-import DAO.Tecnico_Laboratorio.Tecnico_LaboratorioDAOImpl;
-import Gui.AccediTemp;
 import Gui.MainWindow;
-import Gui.MedicoVeterinarioGUI.Medico_VeterinarioTemp;
-import Gui.OperatoreGUI.RiammettiTemp;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws SQLException {

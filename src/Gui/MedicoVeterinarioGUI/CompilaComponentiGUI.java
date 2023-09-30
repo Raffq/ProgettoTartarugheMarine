@@ -17,15 +17,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
-public class ModificaComponenti extends JFrame {
+public class CompilaComponentiGUI extends JFrame {
     private JLabel becco, collo, testa, coda, pinne, occhi, naso;
     private JComboBox condizioneBecco, condizioneCollo, condizioneTesta, condizioneCoda, condizionePinne, condizioneOcchi, condizioneNaso;
     private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
     private JButton conferma;
     private JTable listaTartarughe;
-    public ModificaComponenti(Personale personale) throws SQLException {
-        super("Modifica componenti tartaruga");
+    public CompilaComponentiGUI(Personale personale) throws SQLException {
+        super("Compila componenti tartaruga");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
@@ -34,6 +34,7 @@ public class ModificaComponenti extends JFrame {
         DefaultTableModel tableModel = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
+                //all cells false
                 return false;
             }
         };

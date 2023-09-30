@@ -61,7 +61,7 @@ public class Cartella_ClinicaDAOImpl implements Cartella_ClinicaDAO {
                 int lunghezza = resultSet.getInt("lunghezza");
                 int larghezza = resultSet.getInt("larghezza");
                 int peso = resultSet.getInt("peso");
-                String luogoRitrovamento = resultSet.getString("luogoRitrovamento");
+                String luogoRitrovamento = resultSet.getString("luogoritrovamento");
                 Date dataAmmissione = resultSet.getDate("dataammissione");
                 Date dataRilascio = resultSet.getDate("datarilascio");
                 String fkmatricolamv = resultSet.getString("fkmatricolamv");

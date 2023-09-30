@@ -1,5 +1,10 @@
 package Gui.MedicoVeterinarioGUI;
 
+import ClassiPrincipali.Cartella_Clinica;
+import ClassiPrincipali.Personale;
+import ClassiPrincipali.Tartaruga;
+import Controller.Controller;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -8,45 +13,42 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import ClassiPrincipali.Personale;
-import ClassiPrincipali.Tartaruga;
-import Controller.Controller;
-
-public class CompilaCartellaClinicaTemp extends JFrame {
-    private JTable listaTartarughe;
+public class ModificaCartellaClinicaGUI extends JFrame {
+    private JTable listaCartelleCliniche;
     private JTextField specie;
     private JTextField lunghezza;
     private JTextField larghezza;
     private JTextField peso;
     private JTextField luogoRitrovamento;
     private JButton conferma;
-    public CompilaCartellaClinicaTemp(Personale personale) throws SQLException {
-        super("Compila cartella clinica tartaruga");
+    public ModificaCartellaClinicaGUI(Personale personale) throws SQLException {
+        super("Modifica cartella clinica tartaruga");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
 
         Controller controller = new Controller();
 
-        listaTartarughe = new JTable();
-        Object[] columns = {"Targhetta", "Nome"};
+        listaCartelleCliniche = new JTable();
+        Object[] columns = {"idcartellecliniche", "matricola"};
         DefaultTableModel model = new DefaultTableModel(){
             @Override
             public boolean isCellEditable(int row, int column) {
+                //all cells false
                 return false;
             }
         };
 
         model.setColumnIdentifiers(columns);
-        ArrayList<Tartaruga> data = new ArrayList<>();
-        data = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
+        ArrayList<Cartella_Clinica> data = new ArrayList<>();
+        data = controller.getCartelleCliniche();
 
-        for(Tartaruga i : data){
-            model.addRow(new Object[]{i.getTarghetta(), i.getNomeTartaruga()});
+        for(Cartella_Clinica i : data){
+            model.addRow(new Object[]{i.getIdCartellaClinica(), i.getFkMatricolamv()});
         }
 
-        listaTartarughe.setModel(model);
+        listaCartelleCliniche.setModel(model);
 
-        JScrollPane scrollPane = new JScrollPane(listaTartarughe);
+        JScrollPane scrollPane = new JScrollPane(listaCartelleCliniche);
 
         specie = new JTextField("specie");
         lunghezza = new JTextField("lunghezza");
@@ -58,18 +60,18 @@ public class CompilaCartellaClinicaTemp extends JFrame {
         conferma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String tartarugaScelta = (String) listaTartarughe.getValueAt(listaTartarughe.getSelectedRow(), 0);
+                String cartellaClinicaScelta = (String) listaCartelleCliniche.getValueAt(listaCartelleCliniche.getSelectedRow(), 0);
                 String specieScelta = specie.getText();
-                    String lunghezzaSceltaTemp = lunghezza.getText();
+                String lunghezzaSceltaTemp = lunghezza.getText();
                 int lunghezzaScelta = Integer.parseInt(lunghezzaSceltaTemp);
-                    String larghezzaSceltaTemp = larghezza.getText();
+                String larghezzaSceltaTemp = larghezza.getText();
                 int larghezzaScelta = Integer.parseInt(larghezzaSceltaTemp);
-                    String pesoSceltoTemp = peso.getText();
+                String pesoSceltoTemp = peso.getText();
                 int pesoScelto = Integer.parseInt(pesoSceltoTemp);
                 String luogoRitrovamentoScelto = luogoRitrovamento.getText();
 
                 try {
-                    controller.compileLastCartellaClinica(tartarugaScelta, specieScelta,lunghezzaScelta, larghezzaScelta, pesoScelto, luogoRitrovamentoScelto, personale.getMatricola());
+                    controller.updateCartellaClinica(cartellaClinicaScelta, specieScelta,lunghezzaScelta, larghezzaScelta, pesoScelto, luogoRitrovamentoScelto, personale.getMatricola());
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }

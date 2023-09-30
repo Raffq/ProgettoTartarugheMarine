@@ -1,5 +1,6 @@
 package DAO.Componenti;
 
+import ClassiPrincipali.Cartella_Clinica;
 import ClassiPrincipali.Centro;
 import ClassiPrincipali.Componenti;
 import DAO.Database;
@@ -8,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ComponentiDAOImpl implements ComponentiDAO {
@@ -39,6 +41,40 @@ public class ComponentiDAOImpl implements ComponentiDAO {
             }
         } catch (SQLException e) {
             System.out.println("Qualcosa è andato storto!");
+        }
+        return componenti;
+    }
+
+    public ArrayList<Componenti> getComponenti() throws SQLException {
+        Connection con = Database.getConnection();
+        ArrayList<Componenti> componenti= new ArrayList();
+
+        try {
+            String sql = "SELECT * FROM Componenti";
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                String idcomponenti = resultSet.getString("idcomponenti");
+                String condizioneBecco= resultSet.getString("condizionebecco");
+                String condizioneCollo = resultSet.getString("condizionecollo");
+                String condizioneTesta = resultSet.getString("condizionetesta");
+                String condizioneCoda = resultSet.getString("condizionecoda");
+                String condizionePinne = resultSet.getString("condizionepinne");
+                String condizioneOcchi = resultSet.getString("condizioneocchi");
+                String condizioneNaso = resultSet.getString("condizionenaso");
+                Date dataCompilazione = resultSet.getDate("datacompilazione");
+                String fkTarghetta = resultSet.getString("fktarghetta");
+                String fkIdCartellaClinica = resultSet.getString("fkidcartellaclinica");
+
+                System.out.println(condizioneBecco);
+
+                Componenti componente = new Componenti(idcomponenti, condizioneBecco, condizioneCollo, condizioneTesta, condizioneCoda, condizionePinne, condizioneOcchi, condizioneNaso, dataCompilazione, fkTarghetta, fkIdCartellaClinica);
+                componenti.add(componente);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return componenti;
     }

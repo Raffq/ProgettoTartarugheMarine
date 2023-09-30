@@ -10,12 +10,12 @@ import java.text.ParseException;
 import ClassiPrincipali.Personale;
 import Controller.Controller;
 
-public class OperatoreTemp extends JFrame {
+public class OperatoreGUI extends JFrame {
     private JButton ammetti;
     private JButton riammetti;
     private JButton rilascia;
 
-    public OperatoreTemp(Personale personale) {
+    public OperatoreGUI(Personale personale) {
         FlowLayout flowLayout=new FlowLayout(FlowLayout.CENTER, 20, 0);
         setLayout(flowLayout);
 

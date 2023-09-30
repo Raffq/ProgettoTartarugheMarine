@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 
 import Controller.Controller;
 
-public class RicercatoreTemp extends JFrame {
+public class RicercatoreGUI extends JFrame {
     private JButton visualizzaStatistiche;
-    public RicercatoreTemp() {
+    public RicercatoreGUI() {
         super("Ricercatore");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         setLayout(flowLayout);
