@@ -130,6 +130,7 @@ public class CompilaComponentiGUI extends JPanel {
     public void populateListaTartarughe()
     {
         try {
+            tableModel.setRowCount(0);
             ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
 
             for (Tartaruga i: tartarughe) {

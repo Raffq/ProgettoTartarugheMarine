@@ -18,6 +18,7 @@ public class AccediGUI extends JPanel {
         buttonLogin = new JButton("Accedi");;
         loginMatricola = new JTextField();
         accediLabel = new JLabel("Inserisci matricola");
+        accediLabel.setFont(new Font("Tahoma",Font.PLAIN, 25));
 
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(200, 120));

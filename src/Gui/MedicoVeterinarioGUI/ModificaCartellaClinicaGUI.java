@@ -74,7 +74,7 @@ public class ModificaCartellaClinicaGUI extends JPanel {
                 String luogoRitrovamentoScelto = luogoRitrovamento.getText();
 
                 try {
-                    controller.compileLastCartellaClinica(tartarugaScelta, specieScelta,lunghezzaScelta, larghezzaScelta, pesoScelto, luogoRitrovamentoScelto, personale.getMatricola());
+                    controller.updateCartellaClinica(tartarugaScelta, specieScelta,lunghezzaScelta, larghezzaScelta, pesoScelto, luogoRitrovamentoScelto, personale.getMatricola());
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -115,6 +115,7 @@ public class ModificaCartellaClinicaGUI extends JPanel {
     public void populateListaTartarughe()
     {
         try {
+            model.setRowCount(0);
             ArrayList<Tartaruga> data = new ArrayList<>();
             data = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
 

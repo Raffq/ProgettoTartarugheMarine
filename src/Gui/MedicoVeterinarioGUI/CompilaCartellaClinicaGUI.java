@@ -115,6 +115,7 @@ public class CompilaCartellaClinicaGUI extends JPanel {
     public void populateListaTartarughe()
     {
         try {
+            tableModel.setRowCount(0);
             ArrayList<Tartaruga> data = new ArrayList<>();
 
             if(personale != null) {

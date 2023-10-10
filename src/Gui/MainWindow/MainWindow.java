@@ -23,7 +23,7 @@ public class MainWindow extends JFrame {
     public Controller controller;
     public Personale membroPersonale;
     public MainWindow(Controller c) throws SQLException {
-        super("Tartarughe");
+        super("Centro Assistenza Tartarughe Marine");
         this.controller = c;
 
         setLayout(new BorderLayout());

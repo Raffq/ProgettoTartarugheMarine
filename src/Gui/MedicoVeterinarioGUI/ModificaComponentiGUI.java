@@ -125,7 +125,7 @@ public class ModificaComponentiGUI extends JPanel {
                 String selectedCondizioneOcchi = (String) condizioneOcchi.getSelectedItem();
                 String selectedCondizioneNaso = (String) condizioneNaso.getSelectedItem();
                 try {
-                    controller.compileComponenti(selectedCellValue, sqlDate, selectedCondizioneBecco, selectedCondizioneCollo, selectedCondizioneTesta, selectedCondizioneCoda, selectedCondizionePinne, selectedCondizioneOcchi, selectedCondizioneNaso);
+                    controller.updateComponenti(selectedCellValue, sqlDate, selectedCondizioneBecco, selectedCondizioneCollo, selectedCondizioneTesta, selectedCondizioneCoda, selectedCondizionePinne, selectedCondizioneOcchi, selectedCondizioneNaso);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -136,6 +136,7 @@ public class ModificaComponentiGUI extends JPanel {
     public void populateListaTartarughe()
     {
         try {
+            tableModel.setRowCount(0);
             ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);
 
             for (Tartaruga i: tartarughe) {

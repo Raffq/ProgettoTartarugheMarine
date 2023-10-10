@@ -27,6 +27,8 @@ public class AmmettiGUI extends JPanel {
 
         nomeTart = new JTextField(15);
         conferma = new JButton("conferma");
+
+
         add(nomeTart);
         add(conferma);
         datePicker = new DatePicker().Calendar();

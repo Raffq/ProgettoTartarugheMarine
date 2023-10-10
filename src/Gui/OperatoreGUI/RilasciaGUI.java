@@ -69,6 +69,7 @@ public class RilasciaGUI extends JPanel {
 
     public void populateListaTartarughe()
     {
+        tableModel.setRowCount(0);
         ArrayList<Tartaruga> tartarughe = null;
         try {
             tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), true);

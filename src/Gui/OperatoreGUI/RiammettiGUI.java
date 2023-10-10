@@ -69,8 +69,8 @@ public class RiammettiGUI extends JPanel {
 
     public void populateListaTartarughe() {
         try {
+            tableModel.setRowCount(0);
             ArrayList<Tartaruga> tartarughe = controller.getTartarugheNelCentro(personale.getfkidcentro(), false);
-
             for (Tartaruga i: tartarughe) {
                 this.tableModel.addRow(new Object[]{i.getTarghetta(), i.getNomeTartaruga()});
             }
