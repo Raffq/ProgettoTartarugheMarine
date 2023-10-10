@@ -173,4 +173,4 @@ public class Controller {
             return ComponentiDAO.getComponenti();
         }
 
-    }
+}

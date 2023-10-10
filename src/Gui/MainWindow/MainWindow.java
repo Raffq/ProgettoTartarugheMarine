@@ -11,18 +11,32 @@ import Gui.RicercatoreGUI.RicercatoreGUI;
 import Gui.TecnicoLaboratorioGUI.Tecnico_LaboratorioButtonsGUI;
 import Gui.TecnicoLaboratorioGUI.Tecnico_LaboratorioGUI;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Color;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class MainWindow extends JFrame {
 
     public Controller controller;
     public Personale membroPersonale;
-    public MainWindow(Controller c) throws SQLException {
+    private BufferedImage sfondoImage;
+    private BufferedImage sfondoImage2;
+    public MainWindow(Controller c) throws SQLException, MalformedURLException, IOException {
         super("Centro Assistenza Tartarughe Marine");
         this.controller = c;
 
@@ -37,7 +51,18 @@ public class MainWindow extends JFrame {
         mainPanel.setLayout(new BorderLayout(0, 0));
 
         // TOP PANEL
-        JPanel topPanel = new JPanel();
+        try {
+            sfondoImage2 = ImageIO.read(new File("/Users/giovannidelgaudio/Desktop/ProgettoExtra/Ombra.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JPanel topPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(sfondoImage2, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         OperatoreButtonsGUI operatoreButtons = new OperatoreButtonsGUI();
         operatoreButtons.setVisible(false);
         topPanel.add(operatoreButtons);
@@ -52,7 +77,18 @@ public class MainWindow extends JFrame {
         topPanel.add(tecnicoLaboratorioButtons);
 
         // MIDDLE PANEL
-        JPanel middlePanel = new JPanel();
+        try {
+            sfondoImage = ImageIO.read(new File("/Users/giovannidelgaudio/Desktop/ProgettoExtra/wallpaperflare.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JPanel middlePanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(sfondoImage, 0, 0, getWidth(), getHeight(), this);
+        }
+        };
         OperatoreGUI operatoriPanels = new OperatoreGUI();
         middlePanel.add(operatoriPanels);
         operatoriPanels.setVisible(false);
@@ -222,11 +258,19 @@ public class MainWindow extends JFrame {
         rightPanel.setPreferredSize(new Dimension(300, 700));
         middlePanel.setPreferredSize(new Dimension(1100, 700));
 
-        topPanel.setBackground(Color.lightGray);
+
+        Color lightBlue=new Color(175  ,221, 234);
+        Color colorLightGreen=new Color(3,209, 0);
+        Color colorWhite=new Color(255,255, 255);
+
+        topPanel.setBackground(lightBlue);
+        rightPanel.setBackground(lightBlue);
+        middlePanel.setBackground(colorWhite);
 
         add(topPanel, BorderLayout.PAGE_START);
         add(middlePanel, BorderLayout.CENTER);
         add(rightPanel, BorderLayout.LINE_END);
+
 
         setVisible(true);
     }

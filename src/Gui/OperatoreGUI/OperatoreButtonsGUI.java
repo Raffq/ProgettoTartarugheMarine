@@ -1,6 +1,9 @@
 package Gui.OperatoreGUI;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 
 public class OperatoreButtonsGUI extends JPanel {
 
@@ -16,6 +19,10 @@ public class OperatoreButtonsGUI extends JPanel {
         add(ammettiButton);
         add(riammettiButton);
         add(rilasciaButton);
+
+        Color colorLightGreen=new Color(7,209, 0);
+        setBackground(colorLightGreen);
+
     }
 
     public JButton getAmmettiButton()

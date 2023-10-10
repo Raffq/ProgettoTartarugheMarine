@@ -1,6 +1,7 @@
 package Gui.OperatoreGUI;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class OperatoreGUI extends JPanel {
     private AmmettiGUI ammettiPanel;
@@ -19,6 +20,7 @@ public class OperatoreGUI extends JPanel {
         rilasciaPanel = new RilasciaGUI();
         add(rilasciaPanel);
         rilasciaPanel.setVisible(false);
+
     }
 
     public void showAmmetti() {
