@@ -50,6 +50,7 @@ public class MainWindow extends JFrame {
         mainPanel.setBorder(null);
         mainPanel.setLayout(new BorderLayout(0, 0));
 
+        int giacomo;
         // TOP PANEL
         try {
             sfondoImage2 = ImageIO.read(new File("/Users/giovannidelgaudio/Desktop/ProgettoExtra/Ombra.png"));
